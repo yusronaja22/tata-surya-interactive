@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   viewBox="0 0 972.29999 248.89996"
+   id="svg3107"
+   sodipodi:docname="165 - Copy.svg"
+   width="972.29999"
+   height="248.89996"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3107"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.29683753"
+     inkscape:cx="2762.4539"
+     inkscape:cy="833.78944"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1925" />
+  <!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 2.1.3 Build 182)  -->
+  <defs
+     id="defs1775">
+    <style
+       id="style1">&#10;      .st0 {&#10;        fill: url(#radial-gradient196);&#10;      }&#10;&#10;      .st1 {&#10;        fill: url(#radial-gradient292);&#10;      }&#10;&#10;      .st1, .st2, .st3, .st4, .st5, .st6, .st7, .st8, .st9, .st10, .st11, .st12, .st13, .st14, .st15, .st16, .st17, .st18, .st19, .st20, .st21, .st22, .st23, .st24, .st25, .st26, .st27, .st28, .st29, .st30, .st31, .st32, .st33, .st34, .st35, .st36, .st37, .st38, .st39, .st40, .st41, .st42, .st43, .st44, .st45, .st46, .st47, .st48, .st49, .st50, .st51, .st52, .st53, .st54, .st55, .st56, .st57, .st58, .st59, .st60, .st61, .st62, .st63, .st64, .st65, .st66, .st67, .st68, .st69, .st70, .st71, .st72, .st73, .st74, .st75, .st76, .st77, .st78 {&#10;        isolation: isolate;&#10;      }&#10;&#10;      .st1, .st25, .st42, .st79, .st45, .st51, .st55, .st59, .st64, .st67, .st69 {&#10;        mix-blend-mode: screen;&#10;      }&#10;&#10;      .st80 {&#10;        fill: url(#radial-gradient218);&#10;      }&#10;&#10;      .st81 {&#10;        fill: url(#radial-gradient271);&#10;      }&#10;&#10;      .st82 {&#10;        fill: url(#radial-gradient79);&#10;      }&#10;&#10;      .st83 {&#10;        fill: url(#radial-gradient245);&#10;      }&#10;&#10;      .st84 {&#10;        fill: url(#radial-gradient254);&#10;      }&#10;&#10;      .st85 {&#10;        fill: url(#radial-gradient53);&#10;      }&#10;&#10;      .st86 {&#10;        fill: url(#linear-gradient36);&#10;      }&#10;&#10;      .st87 {&#10;        fill: url(#radial-gradient67);&#10;      }&#10;&#10;      .st88 {&#10;        fill: url(#linear-gradient39);&#10;      }&#10;&#10;      .st2 {&#10;        fill: url(#radial-gradient169);&#10;      }&#10;&#10;      .st2, .st3, .st4, .st5, .st6, .st7, .st8, .st9, .st10, .st11, .st14, .st15, .st16, .st17, .st18, .st19, .st20, .st21, .st89, .st23, .st24, .st26, .st27, .st28, .st29, .st30, .st31, .st33, .st34, .st35, .st36, .st37, .st39, .st40, .st43, .st44, .st47, .st48, .st49, .st50, .st52, .st53, .st54, .st56, .st57, .st60, .st61, .st63, .st65, .st66, .st68, .st71, .st72, .st73, .st74, .st75, .st76, .st77, .st78 {&#10;        opacity: .2;&#10;      }&#10;&#10;      .st90 {&#10;        fill: url(#radial-gradient217);&#10;      }&#10;&#10;      .st91 {&#10;        fill: url(#radial-gradient100);&#10;      }&#10;&#10;      .st92 {&#10;        fill: url(#radial-gradient90);&#10;      }&#10;&#10;      .st3 {&#10;        fill: url(#radial-gradient153);&#10;      }&#10;&#10;      .st93 {&#10;        fill: url(#radial-gradient256);&#10;      }&#10;&#10;      .st94 {&#10;        fill: url(#radial-gradient20);&#10;      }&#10;&#10;      .st95 {&#10;        fill: url(#radial-gradient64);&#10;      }&#10;&#10;      .st96 {&#10;        fill: url(#radial-gradient189);&#10;      }&#10;&#10;      .st97 {&#10;        fill: url(#radial-gradient122);&#10;      }&#10;&#10;      .st4 {&#10;        fill: url(#radial-gradient164);&#10;      }&#10;&#10;      .st98 {&#10;        fill: url(#linear-gradient34);&#10;      }&#10;&#10;      .st5 {&#10;        fill: url(#radial-gradient160);&#10;      }&#10;&#10;      .st99 {&#10;        fill: url(#radial-gradient98);&#10;      }&#10;&#10;      .st100 {&#10;        fill: url(#radial-gradient272);&#10;      }&#10;&#10;      .st101 {&#10;        fill: url(#linear-gradient58);&#10;      }&#10;&#10;      .st102 {&#10;        fill: url(#radial-gradient126);&#10;      }&#10;&#10;      .st103 {&#10;        fill: url(#radial-gradient30);&#10;      }&#10;&#10;      .st104 {&#10;        fill: url(#radial-gradient28);&#10;      }&#10;&#10;      .st6 {&#10;        fill: url(#radial-gradient170);&#10;      }&#10;&#10;      .st105 {&#10;        fill: url(#radial-gradient192);&#10;      }&#10;&#10;      .st106 {&#10;        fill: url(#linear-gradient49);&#10;      }&#10;&#10;      .st106, .st107, .st108, .st109 {&#10;        stroke: #8b9fbe;&#10;        stroke-miterlimit: 10;&#10;        stroke-width: .8px;&#10;      }&#10;&#10;      .st7 {&#10;        fill: url(#radial-gradient176);&#10;      }&#10;&#10;      .st110 {&#10;        fill: url(#radial-gradient143);&#10;      }&#10;&#10;      .st111 {&#10;        fill: url(#radial-gradient120);&#10;      }&#10;&#10;      .st8 {&#10;        fill: url(#radial-gradient175);&#10;      }&#10;&#10;      .st112 {&#10;        fill: url(#radial-gradient65);&#10;      }&#10;&#10;      .st9 {&#10;        fill: url(#radial-gradient209);&#10;      }&#10;&#10;      .st113 {&#10;        fill: url(#linear-gradient33);&#10;      }&#10;&#10;      .st114 {&#10;        fill: url(#linear-gradient10);&#10;      }&#10;&#10;      .st115 {&#10;        fill: url(#radial-gradient45);&#10;      }&#10;&#10;      .st116 {&#10;        fill: url(#radial-gradient228);&#10;      }&#10;&#10;      .st10 {&#10;        fill: url(#radial-gradient167);&#10;      }&#10;&#10;      .st117 {&#10;        fill: url(#radial-gradient201);&#10;      }&#10;&#10;      .st11 {&#10;        fill: url(#radial-gradient276);&#10;      }&#10;&#10;      .st118 {&#10;        fill: url(#radial-gradient58);&#10;      }&#10;&#10;      .st12 {&#10;        font-size: 16px;&#10;      }&#10;&#10;      .st12, .st22, .st38, .st58 {&#10;        font-family: Nunito-ExtraBold, Nunito;&#10;        font-weight: 700;&#10;      }&#10;&#10;      .st13, .st58 {&#10;        font-size: 26px;&#10;      }&#10;&#10;      .st13, .st62 {&#10;        font-family: Nunito-Medium, Nunito;&#10;        font-weight: 500;&#10;      }&#10;&#10;      .st119 {&#10;        fill: url(#radial-gradient84);&#10;      }&#10;&#10;      .st120 {&#10;        fill: url(#radial-gradient139);&#10;      }&#10;&#10;      .st121 {&#10;        fill: url(#linear-gradient32);&#10;      }&#10;&#10;      .st14 {&#10;        fill: url(#radial-gradient150);&#10;      }&#10;&#10;      .st122 {&#10;        fill: url(#radial-gradient97);&#10;      }&#10;&#10;      .st15 {&#10;        fill: url(#radial-gradient205);&#10;      }&#10;&#10;      .st123 {&#10;        fill: url(#radial-gradient57);&#10;      }&#10;&#10;      .st16 {&#10;        fill: url(#radial-gradient165);&#10;      }&#10;&#10;      .st124 {&#10;        fill: url(#radial-gradient103);&#10;      }&#10;&#10;      .st17 {&#10;        fill: url(#radial-gradient157);&#10;      }&#10;&#10;      .st125 {&#10;        fill: url(#linear-gradient21);&#10;      }&#10;&#10;      .st126 {&#10;        fill: url(#radial-gradient249);&#10;      }&#10;&#10;      .st18 {&#10;        fill: url(#radial-gradient148);&#10;      }&#10;&#10;      .st127 {&#10;        fill: url(#linear-gradient37);&#10;      }&#10;&#10;      .st128 {&#10;        fill: #ff7c01;&#10;      }&#10;&#10;      .st129 {&#10;        fill: url(#radial-gradient39);&#10;      }&#10;&#10;      .st130 {&#10;        fill: url(#linear-gradient56);&#10;      }&#10;&#10;      .st131 {&#10;        fill: url(#radial-gradient48);&#10;      }&#10;&#10;      .st132 {&#10;        fill: url(#radial-gradient263);&#10;      }&#10;&#10;      .st133 {&#10;        fill: url(#linear-gradient27);&#10;      }&#10;&#10;      .st134 {&#10;        fill: url(#radial-gradient286);&#10;      }&#10;&#10;      .st135 {&#10;        fill: url(#radial-gradient119);&#10;      }&#10;&#10;      .st136 {&#10;        fill: url(#radial-gradient123);&#10;      }&#10;&#10;      .st137 {&#10;        fill: url(#linear-gradient53);&#10;      }&#10;&#10;      .st138 {&#10;        fill: url(#linear-gradient57);&#10;      }&#10;&#10;      .st139 {&#10;        fill: url(#radial-gradient85);&#10;      }&#10;&#10;      .st140 {&#10;        fill: url(#radial-gradient112);&#10;      }&#10;&#10;      .st141 {&#10;        fill: url(#radial-gradient211);&#10;      }&#10;&#10;      .st142 {&#10;        fill: url(#radial-gradient59);&#10;      }&#10;&#10;      .st143 {&#10;        fill: url(#radial-gradient213);&#10;      }&#10;&#10;      .st144 {&#10;        fill: url(#linear-gradient35);&#10;      }&#10;&#10;      .st145 {&#10;        fill: url(#radial-gradient55);&#10;      }&#10;&#10;      .st19 {&#10;        fill: url(#radial-gradient177);&#10;      }&#10;&#10;      .st146 {&#10;        fill: url(#radial-gradient10);&#10;      }&#10;&#10;      .st147 {&#10;        fill: url(#radial-gradient251);&#10;      }&#10;&#10;      .st148, .st149 {&#10;        fill: #fff;&#10;      }&#10;&#10;      .st150 {&#10;        fill: url(#radial-gradient41);&#10;      }&#10;&#10;      .st151 {&#10;        fill: url(#radial-gradient198);&#10;      }&#10;&#10;      .st152 {&#10;        fill: url(#radial-gradient54);&#10;      }&#10;&#10;      .st153, .st149 {&#10;        fill-rule: evenodd;&#10;      }&#10;&#10;      .st153, .st22, .st154 {&#10;        fill: #001e50;&#10;      }&#10;&#10;      .st155 {&#10;        fill: url(#linear-gradient26);&#10;      }&#10;&#10;      .st156 {&#10;        fill: url(#radial-gradient138);&#10;      }&#10;&#10;      .st157 {&#10;        fill: url(#radial-gradient110);&#10;      }&#10;&#10;      .st158 {&#10;        fill: url(#radial-gradient78);&#10;      }&#10;&#10;      .st159 {&#10;        fill: url(#radial-gradient117);&#10;      }&#10;&#10;      .st160 {&#10;        fill: url(#radial-gradient24);&#10;      }&#10;&#10;      .st161 {&#10;        fill: url(#radial-gradient186);&#10;      }&#10;&#10;      .st162 {&#10;        fill: url(#linear-gradient9);&#10;      }&#10;&#10;      .st163 {&#10;        fill: url(#radial-gradient101);&#10;      }&#10;&#10;      .st20 {&#10;        fill: url(#radial-gradient172);&#10;      }&#10;&#10;      .st164 {&#10;        fill: url(#radial-gradient115);&#10;      }&#10;&#10;      .st165 {&#10;        fill: url(#radial-gradient227);&#10;      }&#10;&#10;      .st166 {&#10;        fill: url(#linear-gradient18);&#10;      }&#10;&#10;      .st167 {&#10;        fill: url(#radial-gradient128);&#10;      }&#10;&#10;      .st168 {&#10;        fill: url(#radial-gradient193);&#10;      }&#10;&#10;      .st169 {&#10;        fill: url(#radial-gradient237);&#10;      }&#10;&#10;      .st170 {&#10;        fill: url(#radial-gradient284);&#10;      }&#10;&#10;      .st171 {&#10;        fill: url(#radial-gradient11);&#10;      }&#10;&#10;      .st21 {&#10;        fill: url(#radial-gradient146);&#10;      }&#10;&#10;      .st172 {&#10;        fill: url(#radial-gradient270);&#10;      }&#10;&#10;      .st173 {&#10;        fill: url(#radial-gradient77);&#10;      }&#10;&#10;      .st174 {&#10;        fill: #b7d333;&#10;      }&#10;&#10;      .st175 {&#10;        fill: url(#linear-gradient23);&#10;      }&#10;&#10;      .st176 {&#10;        fill: url(#linear-gradient43);&#10;      }&#10;&#10;      .st22 {&#10;        font-size: 38.1px;&#10;      }&#10;&#10;      .st177 {&#10;        fill: url(#radial-gradient49);&#10;      }&#10;&#10;      .st178 {&#10;        fill: #9affff;&#10;      }&#10;&#10;      .st179 {&#10;        fill: url(#linear-gradient8);&#10;      }&#10;&#10;      .st180 {&#10;        fill: url(#radial-gradient46);&#10;      }&#10;&#10;      .st181 {&#10;        fill: url(#radial-gradient135);&#10;      }&#10;&#10;      .st182 {&#10;        fill: url(#radial-gradient83);&#10;      }&#10;&#10;      .st23 {&#10;        fill: url(#radial-gradient152);&#10;      }&#10;&#10;      .st183 {&#10;        fill: url(#radial-gradient118);&#10;      }&#10;&#10;      .st184 {&#10;        fill: url(#linear-gradient11);&#10;      }&#10;&#10;      .st185 {&#10;        fill: url(#radial-gradient234);&#10;      }&#10;&#10;      .st186 {&#10;        fill: url(#radial-gradient34);&#10;      }&#10;&#10;      .st24 {&#10;        fill: url(#radial-gradient179);&#10;      }&#10;&#10;      .st187 {&#10;        fill: #282844;&#10;      }&#10;&#10;      .st188 {&#10;        fill: url(#radial-gradient233);&#10;      }&#10;&#10;      .st25 {&#10;        fill: url(#linear-gradient);&#10;      }&#10;&#10;      .st189 {&#10;        fill: url(#radial-gradient244);&#10;      }&#10;&#10;      .st190 {&#10;        fill: url(#radial-gradient195);&#10;      }&#10;&#10;      .st26 {&#10;        fill: url(#radial-gradient158);&#10;      }&#10;&#10;      .st191 {&#10;        fill: url(#radial-gradient);&#10;      }&#10;&#10;      .st192 {&#10;        fill: url(#radial-gradient94);&#10;      }&#10;&#10;      .st193 {&#10;        fill: url(#radial-gradient21);&#10;      }&#10;&#10;      .st194 {&#10;        fill: url(#linear-gradient16);&#10;      }&#10;&#10;      .st195 {&#10;        fill: url(#radial-gradient76);&#10;      }&#10;&#10;      .st196 {&#10;        fill: url(#radial-gradient52);&#10;      }&#10;&#10;      .st197 {&#10;        fill: url(#radial-gradient107);&#10;      }&#10;&#10;      .st198 {&#10;        fill: url(#linear-gradient24);&#10;      }&#10;&#10;      .st199 {&#10;        fill: url(#radial-gradient19);&#10;      }&#10;&#10;      .st200 {&#10;        fill: url(#radial-gradient71);&#10;      }&#10;&#10;      .st201 {&#10;        fill: url(#radial-gradient22);&#10;      }&#10;&#10;      .st202 {&#10;        fill: url(#radial-gradient291);&#10;      }&#10;&#10;      .st203 {&#10;        fill: url(#radial-gradient5);&#10;      }&#10;&#10;      .st27 {&#10;        fill: url(#radial-gradient281);&#10;      }&#10;&#10;      .st204 {&#10;        fill: url(#radial-gradient132);&#10;      }&#10;&#10;      .st205 {&#10;        fill: url(#linear-gradient30);&#10;      }&#10;&#10;      .st206 {&#10;        fill: url(#radial-gradient1);&#10;      }&#10;&#10;      .st207 {&#10;        fill: url(#radial-gradient113);&#10;      }&#10;&#10;      .st208 {&#10;        fill: url(#radial-gradient93);&#10;      }&#10;&#10;      .st209 {&#10;        fill: url(#linear-gradient46);&#10;      }&#10;&#10;      .st28 {&#10;        fill: url(#radial-gradient203);&#10;      }&#10;&#10;      .st210 {&#10;        fill: url(#radial-gradient108);&#10;      }&#10;&#10;      .st29 {&#10;        fill: url(#radial-gradient183);&#10;      }&#10;&#10;      .st211 {&#10;        fill: url(#radial-gradient235);&#10;      }&#10;&#10;      .st30 {&#10;        fill: url(#radial-gradient279);&#10;      }&#10;&#10;      .st31 {&#10;        fill: url(#radial-gradient206);&#10;      }&#10;&#10;      .st212 {&#10;        fill: url(#radial-gradient87);&#10;      }&#10;&#10;      .st213 {&#10;        fill: url(#linear-gradient22);&#10;      }&#10;&#10;      .st214 {&#10;        fill: url(#radial-gradient229);&#10;      }&#10;&#10;      .st215 {&#10;        fill: url(#radial-gradient42);&#10;      }&#10;&#10;      .st33 {&#10;        fill: url(#radial-gradient151);&#10;      }&#10;&#10;      .st216 {&#10;        fill: url(#radial-gradient33);&#10;      }&#10;&#10;      .st217 {&#10;        fill: url(#linear-gradient29);&#10;      }&#10;&#10;      .st34 {&#10;        fill: url(#radial-gradient154);&#10;      }&#10;&#10;      .st218 {&#10;        fill: url(#radial-gradient47);&#10;      }&#10;&#10;      .st219 {&#10;        fill: url(#radial-gradient82);&#10;      }&#10;&#10;      .st220 {&#10;        fill: url(#radial-gradient230);&#10;      }&#10;&#10;      .st221 {&#10;        fill: url(#radial-gradient86);&#10;      }&#10;&#10;      .st222 {&#10;        fill: url(#radial-gradient130);&#10;      }&#10;&#10;      .st223 {&#10;        fill: url(#radial-gradient199);&#10;      }&#10;&#10;      .st224 {&#10;        fill: url(#radial-gradient38);&#10;      }&#10;&#10;      .st225 {&#10;        fill: url(#radial-gradient121);&#10;      }&#10;&#10;      .st226 {&#10;        fill: url(#radial-gradient31);&#10;      }&#10;&#10;      .st227 {&#10;        fill: url(#radial-gradient35);&#10;      }&#10;&#10;      .st228 {&#10;        fill: url(#radial-gradient197);&#10;      }&#10;&#10;      .st229 {&#10;        fill: url(#linear-gradient19);&#10;      }&#10;&#10;      .st230 {&#10;        fill: url(#linear-gradient12);&#10;      }&#10;&#10;      .st231 {&#10;        fill: url(#radial-gradient26);&#10;      }&#10;&#10;      .st232 {&#10;        fill: url(#radial-gradient142);&#10;      }&#10;&#10;      .st233 {&#10;        fill: url(#radial-gradient252);&#10;      }&#10;&#10;      .st234 {&#10;        fill: url(#radial-gradient95);&#10;      }&#10;&#10;      .st235 {&#10;        fill: url(#radial-gradient232);&#10;      }&#10;&#10;      .st236 {&#10;        fill: url(#radial-gradient226);&#10;      }&#10;&#10;      .st237 {&#10;        fill: url(#linear-gradient42);&#10;      }&#10;&#10;      .st238 {&#10;        fill: url(#linear-gradient28);&#10;      }&#10;&#10;      .st239 {&#10;        fill: url(#radial-gradient133);&#10;      }&#10;&#10;      .st240 {&#10;        fill: url(#radial-gradient111);&#10;      }&#10;&#10;      .st241 {&#10;        fill: url(#radial-gradient66);&#10;      }&#10;&#10;      .st35 {&#10;        fill: url(#radial-gradient173);&#10;      }&#10;&#10;      .st242 {&#10;        fill: url(#radial-gradient253);&#10;      }&#10;&#10;      .st243 {&#10;        fill: url(#radial-gradient7);&#10;      }&#10;&#10;      .st244 {&#10;        fill: url(#radial-gradient92);&#10;      }&#10;&#10;      .st245 {&#10;        fill: url(#radial-gradient37);&#10;      }&#10;&#10;      .st246 {&#10;        fill: url(#radial-gradient18);&#10;      }&#10;&#10;      .st247 {&#10;        fill: url(#radial-gradient68);&#10;      }&#10;&#10;      .st248 {&#10;        fill: url(#linear-gradient40);&#10;      }&#10;&#10;      .st249 {&#10;        fill: url(#radial-gradient231);&#10;      }&#10;&#10;      .st107 {&#10;        fill: url(#linear-gradient44);&#10;      }&#10;&#10;      .st250 {&#10;        fill: url(#radial-gradient14);&#10;      }&#10;&#10;      .st251 {&#10;        fill: url(#radial-gradient75);&#10;      }&#10;&#10;      .st36 {&#10;        fill: url(#radial-gradient149);&#10;      }&#10;&#10;      .st252 {&#10;        fill: url(#radial-gradient96);&#10;      }&#10;&#10;      .st37 {&#10;        fill: url(#radial-gradient278);&#10;      }&#10;&#10;      .st38 {&#10;        font-size: 29.4px;&#10;      }&#10;&#10;      .st253 {&#10;        fill: url(#radial-gradient200);&#10;      }&#10;&#10;      .st39 {&#10;        fill: url(#radial-gradient207);&#10;      }&#10;&#10;      .st254 {&#10;        fill: url(#radial-gradient91);&#10;      }&#10;&#10;      .st255 {&#10;        fill: url(#linear-gradient7);&#10;      }&#10;&#10;      .st256 {&#10;        fill: url(#radial-gradient13);&#10;      }&#10;&#10;      .st257 {&#10;        fill: #010e19;&#10;      }&#10;&#10;      .st40 {&#10;        fill: url(#radial-gradient283);&#10;      }&#10;&#10;      .st258 {&#10;        fill: url(#radial-gradient259);&#10;      }&#10;&#10;      .st259 {&#10;        fill: url(#radial-gradient247);&#10;      }&#10;&#10;      .st260 {&#10;        fill: url(#radial-gradient269);&#10;      }&#10;&#10;      .st261 {&#10;        fill: url(#linear-gradient20);&#10;      }&#10;&#10;      .st262 {&#10;        fill: url(#linear-gradient31);&#10;      }&#10;&#10;      .st263 {&#10;        fill: url(#radial-gradient220);&#10;      }&#10;&#10;      .st41 {&#10;        fill: #ed6331;&#10;        opacity: .3;&#10;      }&#10;&#10;      .st41, .st264, .st70 {&#10;        mix-blend-mode: multiply;&#10;      }&#10;&#10;      .st265 {&#10;        fill: url(#radial-gradient289);&#10;      }&#10;&#10;      .st266 {&#10;        fill: url(#radial-gradient56);&#10;      }&#10;&#10;      .st42 {&#10;        fill: url(#linear-gradient2);&#10;      }&#10;&#10;      .st267 {&#10;        fill: url(#radial-gradient248);&#10;      }&#10;&#10;      .st268 {&#10;        fill: url(#radial-gradient266);&#10;      }&#10;&#10;      .st43 {&#10;        fill: url(#radial-gradient204);&#10;      }&#10;&#10;      .st269 {&#10;        fill: url(#radial-gradient32);&#10;      }&#10;&#10;      .st44 {&#10;        fill: url(#radial-gradient182);&#10;      }&#10;&#10;      .st270 {&#10;        fill: url(#radial-gradient27);&#10;      }&#10;&#10;      .st271 {&#10;        fill: url(#radial-gradient69);&#10;      }&#10;&#10;      .st272 {&#10;        fill: url(#radial-gradient238);&#10;      }&#10;&#10;      .st273 {&#10;        fill: url(#radial-gradient273);&#10;      }&#10;&#10;      .st274 {&#10;        fill: url(#radial-gradient102);&#10;      }&#10;&#10;      .st275 {&#10;        fill: url(#radial-gradient187);&#10;      }&#10;&#10;      .st276 {&#10;        fill: url(#linear-gradient14);&#10;      }&#10;&#10;      .st45 {&#10;        fill: url(#linear-gradient1);&#10;      }&#10;&#10;      .st277 {&#10;        fill: url(#linear-gradient5);&#10;      }&#10;&#10;      .st278 {&#10;        fill: url(#radial-gradient288);&#10;      }&#10;&#10;      .st279 {&#10;        fill: url(#radial-gradient105);&#10;      }&#10;&#10;      .st280 {&#10;        fill: url(#radial-gradient8);&#10;      }&#10;&#10;      .st108 {&#10;        fill: url(#linear-gradient45);&#10;      }&#10;&#10;      .st281 {&#10;        fill: url(#radial-gradient12);&#10;      }&#10;&#10;      .st46 {&#10;        mix-blend-mode: lighten;&#10;      }&#10;&#10;      .st282 {&#10;        fill: url(#radial-gradient188);&#10;      }&#10;&#10;      .st283 {&#10;        fill: #ffd333;&#10;      }&#10;&#10;      .st284 {&#10;        fill: url(#radial-gradient43);&#10;      }&#10;&#10;      .st285 {&#10;        fill: url(#radial-gradient89);&#10;      }&#10;&#10;      .st286 {&#10;        fill: url(#linear-gradient55);&#10;      }&#10;&#10;      .st287 {&#10;        fill: url(#radial-gradient215);&#10;      }&#10;&#10;      .st288 {&#10;        fill: url(#radial-gradient140);&#10;      }&#10;&#10;      .st289 {&#10;        fill: url(#radial-gradient185);&#10;      }&#10;&#10;      .st290 {&#10;        fill: url(#radial-gradient81);&#10;      }&#10;&#10;      .st47 {&#10;        fill: url(#radial-gradient155);&#10;      }&#10;&#10;      .st291 {&#10;        fill: url(#radial-gradient264);&#10;      }&#10;&#10;      .st48 {&#10;        fill: url(#radial-gradient168);&#10;      }&#10;&#10;      .st292 {&#10;        fill: url(#linear-gradient38);&#10;      }&#10;&#10;      .st293 {&#10;        fill: url(#radial-gradient116);&#10;      }&#10;&#10;      .st294 {&#10;        fill: url(#radial-gradient25);&#10;      }&#10;&#10;      .st295 {&#10;        fill: url(#linear-gradient25);&#10;      }&#10;&#10;      .st296 {&#10;        fill: url(#radial-gradient23);&#10;      }&#10;&#10;      .st297 {&#10;        fill: url(#radial-gradient225);&#10;      }&#10;&#10;      .st49 {&#10;        fill: url(#radial-gradient159);&#10;      }&#10;&#10;      .st50 {&#10;        fill: url(#radial-gradient181);&#10;      }&#10;&#10;      .st298 {&#10;        fill: url(#radial-gradient236);&#10;      }&#10;&#10;      .st299 {&#10;        fill: url(#radial-gradient250);&#10;      }&#10;&#10;      .st51 {&#10;        fill: #c1e2ff;&#10;      }&#10;&#10;      .st300 {&#10;        fill: url(#radial-gradient124);&#10;      }&#10;&#10;      .st301 {&#10;        fill: url(#linear-gradient52);&#10;      }&#10;&#10;      .st52 {&#10;        fill: url(#radial-gradient184);&#10;      }&#10;&#10;      .st302 {&#10;        fill: url(#linear-gradient15);&#10;      }&#10;&#10;      .st53 {&#10;        fill: url(#radial-gradient163);&#10;      }&#10;&#10;      .st303 {&#10;        fill: url(#radial-gradient17);&#10;      }&#10;&#10;      .st54 {&#10;        fill: url(#radial-gradient277);&#10;      }&#10;&#10;      .st304 {&#10;        fill: url(#radial-gradient6);&#10;      }&#10;&#10;      .st305 {&#10;        fill: url(#radial-gradient265);&#10;      }&#10;&#10;      .st306 {&#10;        fill: url(#radial-gradient190);&#10;      }&#10;&#10;      .st307 {&#10;        fill: url(#linear-gradient17);&#10;      }&#10;&#10;      .st308 {&#10;        fill: url(#radial-gradient2);&#10;      }&#10;&#10;      .st309 {&#10;        fill: url(#linear-gradient54);&#10;      }&#10;&#10;      .st55 {&#10;        fill: url(#radial-gradient287);&#10;      }&#10;&#10;      .st310 {&#10;        fill: #c96046;&#10;      }&#10;&#10;      .st311 {&#10;        fill: url(#linear-gradient50);&#10;      }&#10;&#10;      .st312 {&#10;        fill: url(#radial-gradient40);&#10;      }&#10;&#10;      .st313 {&#10;        fill: url(#radial-gradient50);&#10;      }&#10;&#10;      .st56 {&#10;        fill: url(#radial-gradient156);&#10;      }&#10;&#10;      .st314 {&#10;        fill: url(#radial-gradient61);&#10;      }&#10;&#10;      .st315 {&#10;        fill: url(#radial-gradient63);&#10;      }&#10;&#10;      .st316 {&#10;        fill: url(#radial-gradient109);&#10;      }&#10;&#10;      .st317 {&#10;        fill: url(#radial-gradient191);&#10;      }&#10;&#10;      .st318 {&#10;        fill: url(#radial-gradient106);&#10;      }&#10;&#10;      .st319 {&#10;        fill: url(#radial-gradient267);&#10;      }&#10;&#10;      .st320 {&#10;        fill: url(#radial-gradient144);&#10;      }&#10;&#10;      .st321 {&#10;        fill: url(#radial-gradient261);&#10;      }&#10;&#10;      .st322 {&#10;        fill: url(#radial-gradient255);&#10;      }&#10;&#10;      .st323 {&#10;        fill: url(#radial-gradient224);&#10;      }&#10;&#10;      .st324 {&#10;        fill: url(#radial-gradient257);&#10;      }&#10;&#10;      .st325 {&#10;        fill: url(#radial-gradient15);&#10;      }&#10;&#10;      .st326 {&#10;        fill: url(#radial-gradient129);&#10;      }&#10;&#10;      .st57 {&#10;        fill: url(#radial-gradient178);&#10;      }&#10;&#10;      .st327 {&#10;        fill: url(#linear-gradient51);&#10;      }&#10;&#10;      .st59 {&#10;        fill: url(#radial-gradient290);&#10;      }&#10;&#10;      .st328 {&#10;        fill: url(#radial-gradient60);&#10;      }&#10;&#10;      .st329 {&#10;        fill: url(#radial-gradient131);&#10;      }&#10;&#10;      .st330 {&#10;        fill: url(#radial-gradient262);&#10;      }&#10;&#10;      .st331 {&#10;        fill: url(#linear-gradient6);&#10;      }&#10;&#10;      .st332 {&#10;        fill: url(#radial-gradient44);&#10;      }&#10;&#10;      .st333 {&#10;        fill: url(#radial-gradient62);&#10;      }&#10;&#10;      .st60 {&#10;        fill: url(#radial-gradient274);&#10;      }&#10;&#10;      .st334 {&#10;        fill: url(#radial-gradient222);&#10;      }&#10;&#10;      .st61 {&#10;        fill: url(#radial-gradient145);&#10;      }&#10;&#10;      .st62 {&#10;        font-size: 18px;&#10;      }&#10;&#10;      .st335 {&#10;        fill: url(#radial-gradient242);&#10;      }&#10;&#10;      .st336 {&#10;        fill: url(#radial-gradient258);&#10;      }&#10;&#10;      .st337 {&#10;        fill: url(#radial-gradient73);&#10;      }&#10;&#10;      .st338 {&#10;        fill: url(#radial-gradient4);&#10;      }&#10;&#10;      .st339 {&#10;        fill: url(#radial-gradient268);&#10;      }&#10;&#10;      .st340 {&#10;        fill: url(#radial-gradient104);&#10;      }&#10;&#10;      .st341 {&#10;        fill: url(#radial-gradient88);&#10;      }&#10;&#10;      .st342 {&#10;        fill: url(#radial-gradient70);&#10;      }&#10;&#10;      .st343 {&#10;        fill: #28bbff;&#10;      }&#10;&#10;      .st344 {&#10;        fill: url(#radial-gradient136);&#10;      }&#10;&#10;      .st345 {&#10;        fill: url(#radial-gradient127);&#10;      }&#10;&#10;      .st346 {&#10;        fill: url(#radial-gradient194);&#10;      }&#10;&#10;      .st347 {&#10;        fill: url(#radial-gradient3);&#10;      }&#10;&#10;      .st63 {&#10;        fill: url(#radial-gradient166);&#10;      }&#10;&#10;      .st348 {&#10;        fill: url(#radial-gradient29);&#10;      }&#10;&#10;      .st64 {&#10;        fill: url(#linear-gradient4);&#10;      }&#10;&#10;      .st65 {&#10;        fill: url(#radial-gradient275);&#10;      }&#10;&#10;      .st349 {&#10;        fill: url(#linear-gradient13);&#10;      }&#10;&#10;      .st66 {&#10;        fill: url(#radial-gradient180);&#10;      }&#10;&#10;      .st67 {&#10;        fill: url(#radial-gradient285);&#10;      }&#10;&#10;      .st109 {&#10;        fill: url(#linear-gradient48);&#10;      }&#10;&#10;      .st350 {&#10;        fill: url(#radial-gradient125);&#10;      }&#10;&#10;      .st351 {&#10;        fill: #6e78b3;&#10;      }&#10;&#10;      .st352 {&#10;        fill: url(#linear-gradient47);&#10;      }&#10;&#10;      .st353 {&#10;        fill: url(#radial-gradient137);&#10;      }&#10;&#10;      .st354 {&#10;        fill: url(#radial-gradient9);&#10;      }&#10;&#10;      .st355 {&#10;        fill: url(#radial-gradient240);&#10;      }&#10;&#10;      .st356 {&#10;        fill: url(#radial-gradient51);&#10;      }&#10;&#10;      .st357 {&#10;        fill: url(#radial-gradient210);&#10;      }&#10;&#10;      .st358 {&#10;        fill: url(#radial-gradient243);&#10;      }&#10;&#10;      .st68 {&#10;        fill: url(#radial-gradient282);&#10;      }&#10;&#10;      .st69 {&#10;        fill: url(#linear-gradient3);&#10;      }&#10;&#10;      .st359 {&#10;        fill: url(#radial-gradient246);&#10;      }&#10;&#10;      .st360 {&#10;        fill: url(#radial-gradient219);&#10;      }&#10;&#10;      .st70 {&#10;        fill: url(#radial-gradient141);&#10;      }&#10;&#10;      .st361 {&#10;        fill: url(#radial-gradient212);&#10;      }&#10;&#10;      .st71 {&#10;        fill: url(#radial-gradient208);&#10;      }&#10;&#10;      .st362 {&#10;        fill: url(#radial-gradient239);&#10;      }&#10;&#10;      .st72 {&#10;        fill: url(#radial-gradient214);&#10;      }&#10;&#10;      .st363 {&#10;        fill: url(#radial-gradient114);&#10;      }&#10;&#10;      .st364 {&#10;        fill: url(#linear-gradient41);&#10;      }&#10;&#10;      .st365 {&#10;        fill: url(#radial-gradient99);&#10;      }&#10;&#10;      .st366 {&#10;        fill: url(#radial-gradient36);&#10;      }&#10;&#10;      .st367 {&#10;        opacity: .5;&#10;      }&#10;&#10;      .st368 {&#10;        fill: url(#radial-gradient72);&#10;      }&#10;&#10;      .st73 {&#10;        fill: url(#radial-gradient162);&#10;      }&#10;&#10;      .st369 {&#10;        fill: url(#radial-gradient241);&#10;      }&#10;&#10;      .st370 {&#10;        fill: url(#radial-gradient223);&#10;      }&#10;&#10;      .st371 {&#10;        fill: url(#radial-gradient260);&#10;      }&#10;&#10;      .st74 {&#10;        fill: url(#radial-gradient280);&#10;      }&#10;&#10;      .st372 {&#10;        fill: url(#radial-gradient216);&#10;      }&#10;&#10;      .st373 {&#10;        fill: url(#radial-gradient16);&#10;      }&#10;&#10;      .st75 {&#10;        fill: url(#radial-gradient174);&#10;      }&#10;&#10;      .st76 {&#10;        fill: url(#radial-gradient161);&#10;      }&#10;&#10;      .st374 {&#10;        fill: url(#radial-gradient74);&#10;      }&#10;&#10;      .st375 {&#10;        fill: url(#radial-gradient80);&#10;      }&#10;&#10;      .st77 {&#10;        fill: url(#radial-gradient147);&#10;      }&#10;&#10;      .st78 {&#10;        fill: url(#radial-gradient171);&#10;      }&#10;&#10;      .st376 {&#10;        fill: url(#radial-gradient221);&#10;      }&#10;&#10;      .st377 {&#10;        fill: url(#radial-gradient134);&#10;      }&#10;&#10;      .st378 {&#10;        fill: url(#radial-gradient202);&#10;      }&#10;    </style>
+    <linearGradient
+       id="linear-gradient5"
+       x1="-270.60001"
+       y1="125"
+       x2="-270.60001"
+       y2="508.79999"
+       gradientTransform="matrix(0,1,1,0,-1308.7,915.7)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#fde049"
+         id="stop1650" />
+      <stop
+         offset="1"
+         stop-color="#fefe49"
+         id="stop1651" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient6"
+       x1="-270.5"
+       y1="131.60001"
+       x2="-270.5"
+       y2="506.70001"
+       gradientTransform="matrix(0,1,1,0,-1308.8,915.7)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#fa6b49"
+         id="stop1652" />
+      <stop
+         offset="1"
+         stop-color="#feb749"
+         id="stop1653" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient7"
+       x1="-473.39999"
+       y1="125"
+       x2="-473.39999"
+       y2="508.79999"
+       gradientTransform="matrix(0,1,1,0,-1308.7,915.6)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#fde049"
+         id="stop1654" />
+      <stop
+         offset="1"
+         stop-color="#fefe49"
+         id="stop1655" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient8"
+       x1="-473.39999"
+       y1="131.60001"
+       x2="-473.39999"
+       y2="506.70001"
+       gradientTransform="matrix(0,1,1,0,-1308.7,915.7)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#fa6b49"
+         id="stop1656" />
+      <stop
+         offset="1"
+         stop-color="#feb749"
+         id="stop1657" />
+    </linearGradient>
+    <radialGradient
+       id="radial-gradient284"
+       cx="-372"
+       cy="416.79999"
+       fx="-372"
+       fy="416.79999"
+       r="353.10001"
+       gradientTransform="matrix(0,1,1,0,-1308.7,915.7)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset=".3"
+         stop-color="#58acff"
+         id="stop1658" />
+      <stop
+         offset="1"
+         stop-color="#005fba"
+         id="stop1659" />
+    </radialGradient>
+    <radialGradient
+       id="radial-gradient285"
+       cx="-891.90002"
+       cy="536.29999"
+       fx="-891.90002"
+       fy="536.29999"
+       r="344.5"
+       gradientTransform="matrix(1,0,0,-1,0,1080)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset=".3"
+         stop-color="#58acff"
+         id="stop1660" />
+      <stop
+         offset="1"
+         stop-color="#005fba"
+         id="stop1661" />
+    </radialGradient>
+  </defs>
+  <g
+     id="g2067"
+     transform="translate(1378,-419.2)"
+     style="isolation:isolate">
+    <g
+       id="g2064">
+      <g
+         id="g2061">
+        <rect
+           class="st277"
+           x="-1091.6"
+           y="622.09998"
+           width="399.29999"
+           height="46"
+           id="rect2060"
+           style="fill:url(#linear-gradient5)" />
+        <rect
+           class="st331"
+           x="-1087.1"
+           y="624.20001"
+           width="390.29999"
+           height="42"
+           id="rect2061"
+           style="fill:url(#linear-gradient6)" />
+      </g>
+      <g
+         id="g2063">
+        <rect
+           class="st255"
+           x="-1091.6"
+           y="419.20001"
+           width="399.29999"
+           height="46"
+           id="rect2062"
+           style="fill:url(#linear-gradient7)" />
+        <rect
+           class="st179"
+           x="-1087"
+           y="421.29999"
+           width="390.29999"
+           height="42"
+           id="rect2063"
+           style="fill:url(#linear-gradient8)" />
+      </g>
+    </g>
+    <rect
+       class="st170"
+       x="-1378"
+       y="429.5"
+       width="972.29999"
+       height="228.39999"
+       id="rect2064"
+       style="fill:url(#radial-gradient284)" />
+    <g
+       id="g2066">
+      <rect
+         class="st67"
+         x="-1367.5"
+         y="438.20001"
+         width="951.20001"
+         height="211"
+         rx="11.9"
+         ry="11.9"
+         id="rect2065"
+         style="fill:url(#radial-gradient285)" />
+      <rect
+         class="st51"
+         x="-1363.2"
+         y="442.5"
+         width="942.59998"
+         height="202.39999"
+         id="rect2066" />
+    </g>
+  </g>
+</svg>

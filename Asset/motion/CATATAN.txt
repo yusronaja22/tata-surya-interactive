@@ -1,0 +1,10 @@
+Ini saya nemu html css yang udah gerak. kalo bisa langsung tempel boleh dengan perbaikan. Kalo gak bisa dipake jadiin referensi aja.
+
+Beberapa catatan:
+1. planet udah diganti jadi gif
+2. hapus pluto karena gak termasuk sekarang mah
+3. ukuran planet masih ngaco, jadi atur ulang.
+buat referensi ukuran tata surya:
+https://bosscha.itb.ac.id/id/publik/astronomi-interaktif/skala-tata-surya/
+
+https://sketchfab.com/models/b7c69a6b655b47c99f871d5ec5aee854/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=1&ui_stop=0&ui_theatre=1&ui_watermark=0
