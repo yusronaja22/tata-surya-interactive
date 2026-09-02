@@ -888,6 +888,66 @@
             opacity: 0.15;
             z-index: 0;
         }
+
+        /* Responsive scaling for small landscape screens */
+        @media (max-height: 650px) {
+            .cover-content, .result-content {
+                transform: scale(0.7);
+                transform-origin: center center;
+            }
+            .instructions-content {
+                transform: scale(0.8);
+                transform-origin: center center;
+            }
+            .planet-bar {
+                transform: translateX(-50%) scale(0.75);
+                transform-origin: bottom center;
+                bottom: 5px;
+            }
+            .solar-system-stage {
+                transform: scale(0.85);
+                transform-origin: center top;
+                margin-bottom: -60px;
+            }
+            .question-board {
+                top: 0;
+            }
+            .logo-kemendikdasmen {
+                width: 40px;
+                top: 10px;
+                left: 10px;
+            }
+            .cover-buttons {
+                top: 10px;
+                right: 15px;
+            }
+            .cover-buttons img {
+                width: 30px !important;
+            }
+            .btn-mulai {
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-height: 450px) {
+            .cover-content, .result-content {
+                transform: scale(0.55);
+            }
+            .instructions-content {
+                transform: scale(0.65);
+            }
+            .planet-bar {
+                transform: translateX(-50%) scale(0.6);
+                bottom: -10px;
+            }
+            .solar-system-stage {
+                transform: scale(0.7);
+                margin-bottom: -100px;
+            }
+            .question-board {
+                transform: translate(-50%, 0) scale(0.85);
+            }
+        }
     </style>
 </head>
 <body>
