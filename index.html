@@ -102,6 +102,12 @@
             margin: 0 auto;
             display: block;
             transform: translateY(-15px);
+            animation: floatTitle 4s ease-in-out infinite;
+        }
+
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(-15px); }
+            50% { transform: translateY(-25px); }
         }
 
         .cover-tujuan-misi {
@@ -197,11 +203,18 @@
             border: none;
             cursor: pointer;
             transition: transform 0.2s, filter 0.2s;
+            animation: pulseBtn 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseBtn {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,221,68,0.3)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 15px rgba(255,221,68,0.8)); }
         }
 
         .btn-mulai:hover {
             transform: scale(1.1);
             filter: brightness(1.2);
+            animation: none;
         }
 
         .btn-mulai img {
@@ -1302,17 +1315,14 @@
             } catch(e) {}
         }
 
-        // ========== LANDING PAGE CLICK ==========
-        document.getElementById('cover-screen').addEventListener('click', function() {
+        // ========== TOGGLE FUNCTIONS ==========
+        let isFullscreen = false;
+        function toggleFullscreen() {
             if (!voPembukaPlayed) {
                 playVO('Asset/audio/vo_pembuka.mp3');
                 voPembukaPlayed = true;
             }
-        });
-
-        // ========== TOGGLE FUNCTIONS ==========
-        let isFullscreen = false;
-        function toggleFullscreen() {
+            
             if (!isFullscreen) {
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
@@ -1338,6 +1348,9 @@
             document.getElementById('fullscreen-prompt').style.display = 'none';
             if (!isFullscreen) {
                 toggleFullscreen();
+            } else if (!voPembukaPlayed) {
+                playVO('Asset/audio/vo_pembuka.mp3');
+                voPembukaPlayed = true;
             }
             goToScreen('instructions-screen');
         }
