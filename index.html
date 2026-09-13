@@ -1243,6 +1243,42 @@
             playSound('Asset/audio/wrong.mp3');
         }
 
+        let bgmAudio = null;
+        let bgmFadeInterval = null;
+
+        function initBGM() {
+            if (!bgmAudio) {
+                bgmAudio = new Audio('Asset/audio/bgm-tech-loop.mp3');
+                bgmAudio.loop = true;
+                bgmAudio.volume = 0;
+            }
+        }
+
+        function fadeBGM(targetVolume, duration = 1000) {
+            initBGM();
+            if (!isMusicPlaying && targetVolume > 0) return; // Jangan fade-in jika dimute pengguna
+
+            clearInterval(bgmFadeInterval);
+            
+            if (targetVolume > 0) {
+                bgmAudio.play().catch(() => {});
+            }
+
+            const step = 50;
+            const deltaVolume = (targetVolume - bgmAudio.volume) / (duration / step);
+            
+            bgmFadeInterval = setInterval(() => {
+                let newVolume = bgmAudio.volume + deltaVolume;
+                if ((deltaVolume > 0 && newVolume >= targetVolume) || (deltaVolume < 0 && newVolume <= targetVolume)) {
+                    bgmAudio.volume = targetVolume;
+                    clearInterval(bgmFadeInterval);
+                    if (targetVolume === 0) bgmAudio.pause();
+                } else {
+                    bgmAudio.volume = Math.max(0, Math.min(1, newVolume));
+                }
+            }, step);
+        }
+
         let currentVOAudio = null;
 
         function stopVO() {
@@ -1251,6 +1287,7 @@
                 currentVOAudio.currentTime = 0;
                 currentVOAudio = null;
             }
+            fadeBGM(0.3, 1000); // Naikkan volume BGM secara smooth saat VO berhenti
         }
 
         function playVO(src, onEnded = null) {
@@ -1259,6 +1296,9 @@
                 if (onEnded) onEnded();
                 return;
             }
+            
+            fadeBGM(0, 500); // Matikan BGM secara smooth saat VO mau diputar
+
             try {
                 const audioCtx = getAudioContext();
                 if (audioCtx.state === 'suspended') {
@@ -1266,14 +1306,18 @@
                 }
                 currentVOAudio = new Audio(src);
                 currentVOAudio.volume = 0.7;
-                if (onEnded) {
-                    currentVOAudio.addEventListener('ended', onEnded);
-                    currentVOAudio.addEventListener('error', onEnded);
-                }
-                currentVOAudio.play().catch(() => {
+                
+                const handleVOEnd = () => {
+                    fadeBGM(0.3, 1000);
                     if (onEnded) onEnded();
-                });
+                };
+
+                currentVOAudio.addEventListener('ended', handleVOEnd);
+                currentVOAudio.addEventListener('error', handleVOEnd);
+
+                currentVOAudio.play().catch(handleVOEnd);
             } catch(e) {
+                fadeBGM(0.3, 1000);
                 if (onEnded) onEnded();
             }
         }
@@ -1324,13 +1368,20 @@
             const musicBtn = document.querySelector('.btn-music img');
             if (isMusicPlaying) {
                 musicBtn.src = 'Asset/images/music-on.svg';
-                // Resume audio context if suspended
                 const ctx = getAudioContext();
                 if (ctx.state === 'suspended') {
                     ctx.resume();
                 }
+                // Jika tidak ada VO yang main, nyalakan kembali BGM
+                if (!currentVOAudio || currentVOAudio.paused) {
+                    fadeBGM(0.3, 500);
+                }
             } else {
                 musicBtn.src = 'Asset/images/music-off.svg';
+                if (bgmAudio) {
+                    clearInterval(bgmFadeInterval);
+                    bgmAudio.pause();
+                }
             }
         }
 
