@@ -1682,7 +1682,9 @@
             const q = QUESTIONS[currentQuestion];
 
             // Update UI
-            document.getElementById('question-text-3d').innerHTML = q.question;
+            const questionText = document.getElementById('question-text-3d');
+            questionText.innerHTML = q.question;
+            questionText.style.fontSize = "";
 
             // Play VO soal
             playVO(q.voSoal);
@@ -1785,15 +1787,23 @@
         function nextQuestion() {
             currentQuestion++;
             if (currentQuestion >= QUESTIONS.length) {
-                // Sembunyikan kontainer soal
+                // Tampilkan tantangan di kontainer soal
                 const soalContainer = document.getElementById('soal-container-3d');
-                if (soalContainer) soalContainer.style.display = 'none';
+                if (soalContainer) soalContainer.style.display = 'flex';
+
+                const questionText = document.getElementById('question-text-3d');
+                if (questionText) {
+                    questionText.innerHTML = "Tantangan: Mengapa posisi planet dalam tata surya tidak boleh tertukar? Apa dampak buruknya jika Bumi bertukar tempat dengan Merkurius bagi kehidupan makhluk hidup? Yuk, Tuliskan Jawaban Kalian di Buku catatan! Sampai jumpa!";
+                    questionText.style.fontSize = "clamp(11px, 1.4vw, 15px)";
+                }
 
                 // Tampilkan popup skor di area inventory
                 const scoreDisplay = document.getElementById('final-score-display');
                 const scorePopup = document.getElementById('final-score-popup');
                 if (scoreDisplay) scoreDisplay.textContent = score.toFixed(1);
                 if (scorePopup) scorePopup.style.display = 'flex';
+                
+                playVO('Asset/audio/vo-penutup.mp3');
                 
                 // Reset semua orbit ke warna asal agar orbit planet terakhir tidak beda sendiri
                 if (window.sceneOrbits) {
@@ -1809,7 +1819,7 @@
 
         function endGame() {
             goToScreen('cover-screen');
-            playVO('Asset/audio/vo-penutup.mp3');
+            stopVO();
         }
 
         function resetGame() {
