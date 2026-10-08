@@ -1042,7 +1042,7 @@
                             <li style="margin-bottom: 8px;">Teman-teman bisa membaca dan mencermati ciri-ciri unik planet yang muncul pada papan pertanyaan.</li>
                             <li style="margin-bottom: 8px;">Ambil gambar planet dari kotak planet, lalu seret dan letakkan pada jalur lingkaran orbit yang menurut kalian paling benar.</li>
                             <li style="margin-bottom: 8px;">Jika jalur orbitmu sudah tepat, skormu langsung bertambah!</li>
-                            <li>Jika posisinya masih keliru, skormu berkurang dan kamu bisa coba lagi ke jalur orbit yang benar!</li>
+                            <li>Jika posisinya masih keliru, kamu bisa coba lagi mencari jalur orbit yang benar!</li>
                         </ol>
                     </div>
                 </div>
@@ -1164,7 +1164,7 @@
             {
                 id: 5,
                 planet: 'bumi',
-                question: 'Aku adalah planet terkecil dan aku terletak dekat dengan Matahari. Apakah aku?',
+                question: 'Aku satu-satunya planet yang diketahui memiliki kehidupan. Memiliki air di permukaan dan atmosfer yang melindungi makhluk hidup. Siapakah aku?',
                 correctFeedback: 'Keren! Kamu benar, itu rumah kita tercinta, Planet Bumi!',
                 voCorrect: 'Asset/audio/benar_bumi.mp3',
                 voSoal: 'Asset/audio/soal_bumi.mp3'
@@ -1588,7 +1588,27 @@
                 posArray[i] = (Math.random() - 0.5) * 1500;
             }
             starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const starsMaterial = new THREE.PointsMaterial({ size: 1.5, color: 0xffffff, transparent: true, opacity: 0.8 });
+            // Membuat tekstur bulat bercahaya untuk partikel agar tidak terlihat kotak
+            const canvas = document.createElement('canvas');
+            canvas.width = 16;
+            canvas.height = 16;
+            const context = canvas.getContext('2d');
+            const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
+            gradient.addColorStop(0, 'rgba(255,255,255,1)');
+            gradient.addColorStop(1, 'rgba(255,255,255,0)');
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, 16, 16);
+            const particleTexture = new THREE.CanvasTexture(canvas);
+
+            const starsMaterial = new THREE.PointsMaterial({ 
+                size: 0.8, 
+                map: particleTexture,
+                color: 0x88ccff, 
+                transparent: true, 
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
             const starsMesh = new THREE.Points(starsGeometry, starsMaterial);
             scene.add(starsMesh);
 
@@ -1710,9 +1730,8 @@
             const q = QUESTIONS[currentQuestion];
 
             if (droppedPlanet !== q.planet) {
-                score = Math.max(0, score - 6.25);
                 playWrongSfx();
-                showFeedback(false, 'Ups! Planet yang kamu pilih belum tepat.', '-6,25 poin - Coba lagi!');
+                showFeedback(false, 'Ups! Planet yang kamu pilih belum tepat.', 'Coba lagi!');
                 return;
             }
 
