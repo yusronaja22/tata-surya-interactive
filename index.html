@@ -1226,117 +1226,64 @@
                 </div>
                 <!-- Final Score Popup -->
                 <div id="final-score-popup"
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 10, 40,
-                    0.4); border-radius: 20px; border: 2px solid #4af0c8; display: none; flex-direction: column;
-                    justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; text-align:
-                    center; z-index: 20; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); box-shadow: 0
-                    4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(74, 240, 200, 0.2);">
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 10, 40, 0.4); border-radius: 20px; border: 2px solid #4af0c8; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; text-align: center; z-index: 20; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(74, 240, 200, 0.2);">
                     <h2
-                        style="color: #ffffff; font-size: clamp(18px, 3vw, 24px); margin-bottom: 10px; font-weight: 900; text-transform: uppercase;">
-                        style="color: #ffffff; font-size: clamp(18px, 3vw, 24px); margin-bottom: 10px; font-weight: 900;
-                        text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.9);">
+                        style="color: #ffffff; font-size: clamp(18px, 3vw, 24px); margin-bottom: 10px; font-weight: 900; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.9);">
                         Misi Selesai!</h2>
-                    <p style="color: #d0e8ff; font-size: clamp(12px, 2vw, 16px); margin-bottom: 15px;">Skor Akhir Kamu:
-                    </p>
-                    <div id="final-score-popup"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 10, 40, 0.4); border-radius: 20px; border: 2px solid #4af0c8; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; text-align: center; z-index: 20; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(74, 240, 200, 0.2);">
-                        <h2
-                            style="color: #ffffff; font-size: clamp(18px, 3vw, 24px); margin-bottom: 10px; font-weight: 900; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.9);">
-                            Misi Selesai!</h2>
-                        <p
-                            style="color: #d0e8ff; font-size: clamp(12px, 2vw, 16px); margin-bottom: 15px; text-shadow: 0 1px 3px rgba(0,0,0,0.9);">
-                            Skor Akhir Kamu:</p>
-                        <div id="final-score-display"
-                            style="font-size: clamp(36px, 6vw, 48px); color: #00ff88; font-weight: 900; text-shadow: 0 0 20px rgba(0,255,136,0.5); margin-bottom: 25px;">
-                            100</div>
-                        <div id="final-buttons-container"
-                            style="display: flex; gap: 20px; justify-content: center; align-items: center;">
-                            <button onclick="startGame()"
-                                style="background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));"
-                                onmouseover="this.style.transform='scale(1.1)'"
-                                onmouseout="this.style.transform='scale(1)'">
-                                <img src="Asset/images/ulangi.svg" alt="Ulangi" style="height: clamp(40px, 6vw, 60px);">
-                            </button>
-                            <button onclick="endGame()"
-                                style="background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));"
-                                onmouseover="this.style.transform='scale(1.1)'"
-                                onmouseout="this.style.transform='scale(1)'">
-                                <img src="Asset/images/keluar.svg" alt="Keluar" style="height: clamp(40px, 6vw, 60px);">
-                            </button>
-                        </div>
-                        <p
-                            style="color: #d0e8ff; font-size: clamp(12px, 2vw, 16px); margin-bottom: 15px; text-shadow: 0 1px 3px rgba(0,0,0,0.9);">
-                            Skor Akhir Kamu:</p>
-                        <div id="final-score-display"
-                            style="font-size: clamp(36px, 6vw, 48px); color: #00ff88; font-weight: 900; text-shadow: 0 0 20px rgba(0,255,136,0.5); margin-bottom: 25px;">
-                            100</div>
-                        <div id="final-buttons-container"
-                            style="display: flex; gap: 20px; justify-content: center; align-items: center;">
-                            <button onclick="startGame()"
-                                style="background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));"
-                                onmouseover="this.style.transform='scale(1.1)'"
-                                onmouseout="this.style.transform='scale(1)'">
-                                <img src="Asset/images/ulangi.svg" alt="Ulangi" style="height: clamp(40px, 6vw, 60px);">
-                            </button>
-                            <button onclick="endGame()"
-                                style="background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));"
-                                onmouseover="this.style.transform='scale(1.1)'"
-                                onmouseout="this.style.transform='scale(1)'">
-                                <img src="Asset/images/keluar.svg" alt="Keluar" style="height: clamp(40px, 6vw, 60px);">
-                            </button>
-                        </div>
+                    <p
+                        style="color: #d0e8ff; font-size: clamp(12px, 2vw, 16px); margin-bottom: 15px; text-shadow: 0 1px 3px rgba(0,0,0,0.9);">
+                        Skor Akhir Kamu:</p>
+                    <div id="final-score-display"
+                        style="font-size: clamp(36px, 6vw, 48px); color: #00ff88; font-weight: 900; text-shadow: 0 0 20px rgba(0,255,136,0.5); margin-bottom: 25px;">
+                        100</div>
+                    <div id="final-buttons-container"
+                        style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+                        <button onclick="startGame()"
+                            style="background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="Asset/images/ulangi.svg" alt="Ulangi" style="height: clamp(40px, 6vw, 60px);">
+                        </button>
+                        <button onclick="endGame()"
+                            style="background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="Asset/images/keluar.svg" alt="Keluar" style="height: clamp(40px, 6vw, 60px);">
+                        </button>
                     </div>
                 </div>
-                <div id="canvas-container" style="width: 100vw; height: 100vh;"></div>
-            </div>
-            <div id="canvas-container" style="width: 100vw; height: 100vh;"></div>
-
-            <div id="soal-container-3d"
-                style="position: absolute; bottom: 30px; left: 25px; z-index: 10; width: clamp(260px, 26vw, 380px); max-width: calc(100vw - 320px); pointer-events: none; display: flex; flex-direction: column; justify-content: center; background: rgba(0, 10, 40, 0.55); border: 2px solid #4af0c8; border-radius: 16px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 18px 22px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(74, 240, 200, 0.2); box-sizing: border-box;">
-                <p id="question-text-3d"
-                    style="margin: 0; text-align: left; font-size: clamp(13px, 1.3vw, 16px); line-height: 1.5; color: #ffffff; font-weight: 800; text-shadow: 0 1px 3px rgba(0,0,0,0.8); word-break: break-word; overflow-wrap: break-word;">
-                    Memuat Soal...</p>
-            </div>
-            <div id="soal-container-3d"
-                style="position: absolute; bottom: 30px; left: 25px; z-index: 10; width: clamp(260px, 26vw, 380px); max-width: calc(100vw - 320px); pointer-events: none; display: flex; flex-direction: column; justify-content: center; background: rgba(0, 10, 40, 0.55); border: 2px solid #4af0c8; border-radius: 16px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 18px 22px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(74, 240, 200, 0.2); box-sizing: border-box;">
-                <p id="question-text-3d"
-                    style="margin: 0; text-align: left; font-size: clamp(13px, 1.3vw, 16px); line-height: 1.5; color: #ffffff; font-weight: 800; text-shadow: 0 1px 3px rgba(0,0,0,0.8); word-break: break-word; overflow-wrap: break-word;">
-                    Memuat Soal...</p>
             </div>
         </div>
+        <div id="canvas-container" style="width: 100vw; height: 100vh;"></div>
 
-        <!-- ========== FULLSCREEN PROMPT ========== -->
-        <div id="fullscreen-prompt"
-            style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 5, 20, 0.85); display: none; justify-content: center; align-items: center; z-index: 200;">
-            <!-- ========== FULLSCREEN PROMPT ========== -->
-            <div id="fullscreen-prompt"
-                style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 5, 20, 0.85); display: none; justify-content: center; align-items: center; z-index: 200;"
-                onclick="if(event.target === this) enterFullscreenAndContinue()">
-                <div
-                    style="background: linear-gradient(145deg, #0a1128, #16264c); border: 3px solid #4af0c8; border-radius: 30px; padding: clamp(20px, 4vw, 40px); text-align: center; width: 90%; max-width: 500px; box-shadow: 0 0 40px rgba(74, 240, 200, 0.4), inset 0 0 20px rgba(0,0,0,0.8);">
-                    <h2
-                        style="font-size: clamp(20px, 4vw, 28px); color: #ffffff; text-shadow: 0 2px 5px rgba(0,0,0,0.9); margin-bottom: clamp(10px, 2vw, 15px); font-weight: 900;">
-                        Mode Layar Penuh</h2>
-                    <div
-                        style="background: linear-gradient(145deg, #0a1128, #16264c); border: 3px solid #4af0c8; border-radius: 30px; padding: clamp(20px, 4vw, 40px); text-align: center; width: 90%; max-width: 500px; box-shadow: 0 0 40px rgba(74, 240, 200, 0.4), inset 0 0 20px rgba(0,0,0,0.8);">
-                        <h2
-                            style="font-size: clamp(20px, 4vw, 28px); color: #ffffff; text-shadow: 0 2px 5px rgba(0,0,0,0.9); margin-bottom: clamp(10px, 2vw, 15px); font-weight: 900;">
-                            Mode Layar Penuh</h2>
-                        <div
-                            style="font-size: clamp(14px, 2.5vw, 18px); color: #d0e8ff; margin-bottom: clamp(20px, 4vw, 30px); font-weight: 600;">
-                            Mainkan game dalam layar penuh?</div>
-                        style="font-size: clamp(14px, 2.5vw, 18px); color: #d0e8ff; margin-bottom: clamp(20px, 4vw,
-                        30px); font-weight: 600;">
-                        Mainkan game dalam layar penuh?
-                    </div>
-                    <div style="display: flex; gap: 15px; justify-content: center; align-items: center;">
-                        <button onclick="enterFullscreenAndContinue()"
-                            style="background: linear-gradient(135deg, #4af0c8 0%, #00d2ff 100%); color: #001122; border: 2px solid #ffffff; padding: clamp(10px, 2vw, 14px) clamp(30px, 6vw, 45px); font-size: clamp(16px, 3vw, 20px); font-weight: 900; border-radius: 30px; cursor: pointer; box-shadow: 0 0 20px rgba(74, 240, 200, 0.8); text-transform: uppercase; transition: transform 0.2s;">YA</button>
-                        <button onclick="skipFullscreenAndContinue()"
-                            style="background: rgba(255, 255, 255, 0.15); color: #ffffff; border: 2px solid rgba(255, 255, 255, 0.4); padding: clamp(10px, 2vw, 14px) clamp(25px, 5vw, 35px); font-size: clamp(16px, 3vw, 20px); font-weight: 900; border-radius: 30px; cursor: pointer; text-transform: uppercase; transition: transform 0.2s;">LEWATI</button>
-                    </div>
-                </div>
+        <div id="soal-container-3d"
+            style="position: absolute; bottom: 30px; left: 25px; z-index: 10; width: clamp(260px, 26vw, 380px); max-width: calc(100vw - 320px); pointer-events: none; display: flex; flex-direction: column; justify-content: center; background: rgba(0, 10, 40, 0.55); border: 2px solid #4af0c8; border-radius: 16px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 18px 22px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(74, 240, 200, 0.2); box-sizing: border-box;">
+            <p id="question-text-3d"
+                style="margin: 0; text-align: left; font-size: clamp(13px, 1.3vw, 16px); line-height: 1.5; color: #ffffff; font-weight: 800; text-shadow: 0 1px 3px rgba(0,0,0,0.8); word-break: break-word; overflow-wrap: break-word;">
+                Memuat Soal...</p>
+        </div>
+    </div>
+
+    <!-- ========== FULLSCREEN PROMPT ========== -->
+    <div id="fullscreen-prompt"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 5, 20, 0.85); display: none; justify-content: center; align-items: center; z-index: 200;"
+        onclick="if(event.target === this) enterFullscreenAndContinue()">
+        <div
+            style="background: linear-gradient(145deg, #0a1128, #16264c); border: 3px solid #4af0c8; border-radius: 30px; padding: clamp(20px, 4vw, 40px); text-align: center; width: 90%; max-width: 500px; box-shadow: 0 0 40px rgba(74, 240, 200, 0.4), inset 0 0 20px rgba(0,0,0,0.8);">
+            <h2
+                style="font-size: clamp(20px, 4vw, 28px); color: #ffffff; text-shadow: 0 2px 5px rgba(0,0,0,0.9); margin-bottom: clamp(10px, 2vw, 15px); font-weight: 900;">
+                Mode Layar Penuh</h2>
+            <div
+                style="font-size: clamp(14px, 2.5vw, 18px); color: #d0e8ff; margin-bottom: clamp(20px, 4vw, 30px); font-weight: 600;">
+                Mainkan game dalam layar penuh?</div>
+            <div style="display: flex; gap: 15px; justify-content: center; align-items: center;">
+                <button onclick="enterFullscreenAndContinue()"
+                    style="background: linear-gradient(135deg, #4af0c8 0%, #00d2ff 100%); color: #001122; border: 2px solid #ffffff; padding: clamp(10px, 2vw, 14px) clamp(30px, 6vw, 45px); font-size: clamp(16px, 3vw, 20px); font-weight: 900; border-radius: 30px; cursor: pointer; box-shadow: 0 0 20px rgba(74, 240, 200, 0.8); text-transform: uppercase; transition: transform 0.2s;">YA</button>
+                <button onclick="skipFullscreenAndContinue()"
+                    style="background: rgba(255, 255, 255, 0.15); color: #ffffff; border: 2px solid rgba(255, 255, 255, 0.4); padding: clamp(10px, 2vw, 14px) clamp(25px, 5vw, 35px); font-size: clamp(16px, 3vw, 20px); font-weight: 900; border-radius: 30px; cursor: pointer; text-transform: uppercase; transition: transform 0.2s;">LEWATI</button>
             </div>
+        </div>
+    </div>
 
             <!-- ========== FEEDBACK OVERLAY ========== -->
             <style>
@@ -1647,48 +1594,38 @@
                     }
 
                     if (!isFullscreen) {
-                        if (document.documentElement.requestFullscreen) {
-                            document.documentElement.requestFullscreen();
-                        } else {
-                            document.documentElement.webkitRequestFullscreen();
-                            try {
-                                const elem = document.documentElement;
-                                const req = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen;
-                                if (req) {
-                                    const p = req.call(elem);
-                                    if (p && p.catch) p.catch(() => { });
-                                }
-                            } catch (e) {
-                                console.warn('Fullscreen error:', e);
+                        try {
+                            const elem = document.documentElement;
+                            const req = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen;
+                            if (req) {
+                                const p = req.call(elem);
+                                if (p && p.catch) p.catch(() => { });
                             }
-                            isFullscreen = true;
-                        } else {
-                            if (document.exitFullscreen) {
-                                document.exitFullscreen();
-                            } else {
-                                document.webkitExitFullscreen();
-                                try {
-                                    const doc = document;
-                                    const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-                                    if (exit) {
-                                        const p = exit.call(doc);
-                                        if (p && p.catch) p.catch(() => { });
-                                    }
-                                } catch (e) {
-                                    console.warn('Exit fullscreen error:', e);
-                                }
-                                isFullscreen = false;
-                            }
+                        } catch (e) {
+                            console.warn('Fullscreen error:', e);
                         }
+                        isFullscreen = true;
+                    } else {
+                        try {
+                            const doc = document;
+                            const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+                            if (exit) {
+                                const p = exit.call(doc);
+                                if (p && p.catch) p.catch(() => { });
+                            }
+                        } catch (e) {
+                            console.warn('Exit fullscreen error:', e);
+                        }
+                        isFullscreen = false;
+                    }
+                }
 
                         function showFullscreenPrompt() {
-                            document.getElementById('fullscreen-prompt').style.display = 'flex';
                             const prompt = document.getElementById('fullscreen-prompt');
                             if (prompt) prompt.style.display = 'flex';
                         }
 
                         function enterFullscreenAndContinue() {
-                            document.getElementById('fullscreen-prompt').style.display = 'none';
                             const prompt = document.getElementById('fullscreen-prompt');
                             if (prompt) prompt.style.display = 'none';
                             if (!isFullscreen) {
