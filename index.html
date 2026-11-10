@@ -98,7 +98,7 @@
         .logo-kemendikdasmen {
             position: fixed;
             top: 15px;
-            left: 15px;
+            left: 20px;
             width: clamp(62px, 5.2vw, 80px);
             z-index: 100;
             filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
@@ -574,18 +574,101 @@
             margin-left: 20px;
         }
 
+        /* ========== 3D SCENE UI LAYERS ========== */
+        #ui-3d-layer {
+            position: absolute;
+            top: clamp(90px, 8.5vw, 105px);
+            right: 20px;
+            bottom: 30px;
+            z-index: 10;
+            width: clamp(230px, 25vw, 300px);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #soal-container-3d {
+            position: absolute;
+            top: clamp(90px, 8.5vw, 105px);
+            left: 20px;
+            bottom: auto;
+            z-index: 10;
+            width: clamp(230px, 25vw, 300px);
+            height: auto;
+            min-height: fit-content;
+            max-height: calc(100vh - 130px);
+            overflow-y: auto;
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background: rgba(0, 10, 40, 0.55);
+            border: 2px solid #4af0c8;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: clamp(15px, 1.6vw, 20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(74, 240, 200, 0.25);
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #question-text-3d {
+            margin: 0;
+            text-align: left;
+            font-size: clamp(12px, 1.2vw, 15px);
+            line-height: 1.55;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
         .planet-inventory {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 40px 15px;
+            row-gap: clamp(28px, 3.2vh, 40px);
+            column-gap: clamp(12px, 1.5vw, 22px);
             justify-items: center;
-            align-items: center;
+            align-content: start;
             width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            box-sizing: border-box;
+            background: rgba(0, 10, 40, 0.4);
+            border-radius: 20px;
+            border: 2px solid rgba(74, 158, 255, 0.3);
+            padding: 24px 15px 35px 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(74, 158, 255, 0.15);
+        }
+
+        #planet-inventory::-webkit-scrollbar,
+        #soal-container-3d::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        #planet-inventory::-webkit-scrollbar-track,
+        #soal-container-3d::-webkit-scrollbar-track {
+            background: rgba(0, 10, 40, 0.2);
+            border-radius: 10px;
+        }
+
+        #planet-inventory::-webkit-scrollbar-thumb,
+        #soal-container-3d::-webkit-scrollbar-thumb {
+            background: rgba(74, 240, 200, 0.4);
+            border-radius: 10px;
+        }
+
+        #planet-inventory::-webkit-scrollbar-thumb:hover,
+        #soal-container-3d::-webkit-scrollbar-thumb:hover {
+            background: rgba(74, 240, 200, 0.7);
         }
 
         .planet-item {
-            width: clamp(65px, 7.5vw, 105px);
-            height: clamp(65px, 7.5vw, 105px);
+            width: clamp(56px, 5.8vw, 76px);
+            height: clamp(56px, 5.8vw, 76px);
             border-radius: 50%;
             cursor: grab;
             touch-action: none;
@@ -596,10 +679,11 @@
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 255, 255, 0.25);
             position: relative;
             flex-shrink: 0;
+            margin-bottom: clamp(18px, 2.2vh, 24px);
         }
 
         .planet-item:hover {
-            transform: scale(1.18) translateY(-6px);
+            transform: scale(1.15) translateY(-5px);
             box-shadow: 0 10px 25px rgba(74, 158, 255, 0.8), 0 0 20px rgba(255, 221, 68, 0.6);
             border-color: #ffdd44;
         }
@@ -617,19 +701,21 @@
 
         .planet-item .planet-label {
             position: absolute;
-            bottom: -28px;
+            bottom: -22px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: clamp(12px, 1.4vw, 15px);
+            font-size: clamp(10.5px, 1.1vw, 13px);
             font-weight: 800;
             color: #ffffff;
             text-shadow: 0 0 8px rgba(0, 0, 0, 1), 0 2px 5px rgba(0, 0, 0, 1), 0 -1px 3px rgba(0, 0, 0, 0.8);
             letter-spacing: 0.5px;
             white-space: nowrap;
-            background: rgba(0, 10, 30, 0.5);
+            background: rgba(0, 10, 30, 0.7);
             padding: 2px 8px;
-            border-radius: 10px;
-            border: 1px solid rgba(74, 158, 255, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(74, 158, 255, 0.3);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+            pointer-events: none;
         }
 
         .planet-item.merkurius {
@@ -1063,45 +1149,51 @@
         @media (max-width: 900px),
         (max-height: 600px) {
             #ui-3d-layer {
-                top: 60px !important;
-                bottom: 85px !important;
-                right: 10px !important;
+                top: 55px !important;
+                bottom: 20px !important;
+                right: 12px !important;
                 left: auto !important;
                 transform: none !important;
-                width: clamp(120px, 18vw, 160px) !important;
+                width: clamp(140px, 20vw, 190px) !important;
+            }
+
+            #soal-container-3d {
+                top: 55px !important;
+                bottom: auto !important;
+                left: 12px !important;
+                width: clamp(140px, 20vw, 190px) !important;
+                padding: 10px 12px !important;
+                border-radius: 14px !important;
+                border-width: 1.5px !important;
+                max-height: calc(100vh - 75px) !important;
+            }
+
+            #question-text-3d {
+                font-size: clamp(9px, 1.25vw, 12px) !important;
+                transform: none !important;
+                line-height: 1.4 !important;
             }
 
             #planet-inventory {
                 height: 100% !important;
-                padding: 10px 5px !important;
-                gap: 5px 8px !important;
+                padding: 12px 6px 24px 6px !important;
+                row-gap: 16px !important;
+                column-gap: 8px !important;
                 grid-template-columns: repeat(2, 1fr) !important;
-                align-content: space-evenly !important;
+                align-content: start !important;
             }
 
             #planet-inventory .planet-item {
-                width: clamp(28px, 5vw, 40px) !important;
-                height: clamp(28px, 5vw, 40px) !important;
+                width: clamp(34px, 4.2vw, 46px) !important;
+                height: clamp(34px, 4.2vw, 46px) !important;
+                margin-bottom: 14px !important;
             }
 
             #planet-inventory .planet-label {
-                bottom: -14px !important;
-                font-size: clamp(8px, 1.2vw, 10px) !important;
-            }
-
-            #soal-container-3d {
-                left: 10px !important;
-                bottom: 10px !important;
-                width: clamp(160px, 32vw, 240px) !important;
-                padding: 10px 14px !important;
-                border-radius: 12px !important;
-                border-width: 1.5px !important;
-            }
-
-            #question-text-3d {
-                font-size: clamp(9px, 1.5vw, 12px) !important;
-                transform: none !important;
-                line-height: 1.35 !important;
+                bottom: -15px !important;
+                font-size: clamp(7.5px, 1vw, 9.5px) !important;
+                padding: 1px 5px !important;
+                border-radius: 5px !important;
             }
 
             #final-score-popup {
@@ -1217,12 +1309,10 @@
     <!-- ========== GAME SCREEN (3D) ========== -->
     <div class="screen" id="scene-3d-screen" ondragover="event.preventDefault()"
         ondrop="const p = event.dataTransfer.getData('text/plain') || dragData; if (p && !event.target.closest('#planet-inventory')) checkAnswer(p); dragData = null;">
-        <div id="ui-3d-layer"
-            style="position: absolute; top: 90px; right: 20px; bottom: 120px; z-index: 10; width: clamp(230px, 25vw, 300px); pointer-events: none; display: flex; flex-direction: column; gap: 15px;">
+        <div id="ui-3d-layer">
             <div id="planet-inventory-container"
                 style="position: relative; width: 100%; flex-grow: 1; pointer-events: auto;">
-                <div id="planet-inventory" class="planet-inventory"
-                    style="background: rgba(0, 10, 40, 0.4); border-radius: 20px; border: 2px solid rgba(74, 158, 255, 0.3); padding: 25px 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 30px; justify-items: center; align-content: start; width: 100%; height: 100%; overflow-y: auto;">
+                <div id="planet-inventory" class="planet-inventory">
                 </div>
                 <!-- Final Score Popup -->
                 <div id="final-score-popup"
@@ -1256,11 +1346,12 @@
         </div>
         <div id="canvas-container" style="width: 100vw; height: 100vh;"></div>
 
-        <div id="soal-container-3d"
-            style="position: absolute; bottom: 30px; left: 25px; z-index: 10; width: clamp(260px, 26vw, 380px); max-width: calc(100vw - 320px); pointer-events: none; display: flex; flex-direction: column; justify-content: center; background: rgba(0, 10, 40, 0.55); border: 2px solid #4af0c8; border-radius: 16px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 18px 22px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(74, 240, 200, 0.2); box-sizing: border-box;">
-            <p id="question-text-3d"
-                style="margin: 0; text-align: left; font-size: clamp(13px, 1.3vw, 16px); line-height: 1.5; color: #ffffff; font-weight: 800; text-shadow: 0 1px 3px rgba(0,0,0,0.8); word-break: break-word; overflow-wrap: break-word;">
-                Memuat Soal...</p>
+        <div id="soal-container-3d">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #4af0c8; box-shadow: 0 0 8px #4af0c8; flex-shrink: 0;"></span>
+                <span id="soal-badge-title" style="font-size: clamp(10px, 1vw, 12px); font-weight: 900; letter-spacing: 1.5px; color: #4af0c8; text-transform: uppercase;">MISI DETEKTIF</span>
+            </div>
+            <p id="question-text-3d">Memuat Soal...</p>
         </div>
     </div>
 
@@ -1992,6 +2083,8 @@
                             const questionText = document.getElementById('question-text-3d');
                             questionText.innerHTML = q.question;
                             questionText.style.fontSize = "";
+                            const badge = document.getElementById('soal-badge-title');
+                            if (badge) badge.textContent = "MISI DETEKTIF";
 
                             // Play VO soal
                             playVO(q.voSoal);
@@ -2100,8 +2193,11 @@
                                 const questionText = document.getElementById('question-text-3d');
                                 if (questionText) {
                                     questionText.innerHTML = "Tantangan: Mengapa posisi planet dalam tata surya tidak boleh tertukar? Apa dampak buruknya jika Bumi bertukar tempat dengan Merkurius bagi kehidupan makhluk hidup? Yuk, Tuliskan Jawaban Kalian di Buku catatan! Sampai jumpa!";
-                                    questionText.style.fontSize = "clamp(11px, 1.4vw, 15px)";
+                                    questionText.style.fontSize = "clamp(11px, 1.15vw, 14px)";
                                 }
+
+                                const badge = document.getElementById('soal-badge-title');
+                                if (badge) badge.textContent = "TANTANGAN AKHIR";
 
                                 // Tampilkan popup skor di area inventory
                                 const scoreDisplay = document.getElementById('final-score-display');
