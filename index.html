@@ -12,6 +12,7 @@
     <!-- Three.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="Asset/planet_textures_data.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -1307,8 +1308,9 @@
     </div>
 
     <!-- ========== GAME SCREEN (3D) ========== -->
-    <div class="screen" id="scene-3d-screen" ondragover="event.preventDefault()"
-        ondrop="const p = event.dataTransfer.getData('text/plain') || dragData; if (p && !event.target.closest('#planet-inventory')) checkAnswer(p); dragData = null;">
+    <div class="screen" id="scene-3d-screen"
+        ondragover="event.preventDefault(); if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';"
+        ondrop="event.preventDefault(); const p = (event.dataTransfer && event.dataTransfer.getData('text/plain')) || dragData; if (p && !event.target.closest('#planet-inventory')) checkAnswer(p); dragData = null;">
         <div id="ui-3d-layer">
             <div id="planet-inventory-container"
                 style="position: relative; width: 100%; flex-grow: 1; pointer-events: auto;">
@@ -1344,12 +1346,18 @@
                 </div>
             </div>
         </div>
-        <div id="canvas-container" style="width: 100vw; height: 100vh;"></div>
+        <div id="canvas-container" style="width: 100vw; height: 100vh;"
+            ondragover="event.preventDefault(); if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';"
+            ondrop="event.preventDefault(); const p = (event.dataTransfer && event.dataTransfer.getData('text/plain')) || dragData; if (p) checkAnswer(p); dragData = null;">
+        </div>
 
         <div id="soal-container-3d">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #4af0c8; box-shadow: 0 0 8px #4af0c8; flex-shrink: 0;"></span>
-                <span id="soal-badge-title" style="font-size: clamp(10px, 1vw, 12px); font-weight: 900; letter-spacing: 1.5px; color: #4af0c8; text-transform: uppercase;">MISI DETEKTIF</span>
+                <span
+                    style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #4af0c8; box-shadow: 0 0 8px #4af0c8; flex-shrink: 0;"></span>
+                <span id="soal-badge-title"
+                    style="font-size: clamp(10px, 1vw, 12px); font-weight: 900; letter-spacing: 1.5px; color: #4af0c8; text-transform: uppercase;">MISI
+                    DETEKTIF</span>
             </div>
             <p id="question-text-3d">Memuat Soal...</p>
         </div>
@@ -1376,910 +1384,1082 @@
         </div>
     </div>
 
-            <!-- ========== FEEDBACK OVERLAY ========== -->
-            <style>
-                #feedback-overlay {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
-                    background: rgba(0, 5, 20, 0.85);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: 300;
-                    opacity: 0;
-                    pointer-events: none;
-                    transition: opacity 0.3s ease;
-                }
+    <!-- ========== FEEDBACK OVERLAY ========== -->
+    <style>
+        #feedback-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 5, 20, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
 
-                #feedback-overlay.active {
-                    opacity: 1;
-                    pointer-events: all;
-                }
+        #feedback-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
 
-                #feedback-box {
-                    background: linear-gradient(145deg, #0a1128, #16264c);
-                    border: 4px solid;
-                    border-radius: 30px;
-                    padding: clamp(20px, 4vw, 40px);
-                    text-align: center;
-                    width: 90%;
-                    max-width: 500px;
-                    max-height: 90vh;
-                    overflow-y: auto;
-                    transform: scale(0.8);
-                    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                }
+        #feedback-box {
+            background: linear-gradient(145deg, #0a1128, #16264c);
+            border: 4px solid;
+            border-radius: 30px;
+            padding: clamp(20px, 4vw, 40px);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-                #feedback-overlay.active #feedback-box {
-                    transform: scale(1);
-                }
+        #feedback-overlay.active #feedback-box {
+            transform: scale(1);
+        }
 
-                #feedback-box.correct {
-                    border-color: #00ff88;
-                    box-shadow: 0 0 50px rgba(0, 255, 136, 0.4);
-                }
+        #feedback-box.correct {
+            border-color: #00ff88;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.4);
+        }
 
-                #feedback-box.wrong {
-                    border-color: #ff3366;
-                    box-shadow: 0 0 50px rgba(255, 51, 102, 0.4);
-                }
+        #feedback-box.wrong {
+            border-color: #ff3366;
+            box-shadow: 0 0 50px rgba(255, 51, 102, 0.4);
+        }
 
-                .feedback-text {
-                    font-size: clamp(24px, 5vw, 36px);
-                    font-weight: 900;
-                    margin-bottom: clamp(10px, 2vw, 15px);
-                    text-transform: uppercase;
-                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-                }
+        .feedback-text {
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 900;
+            margin-bottom: clamp(10px, 2vw, 15px);
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
 
-                .feedback-text.correct {
-                    color: #00ff88;
-                }
+        .feedback-text.correct {
+            color: #00ff88;
+        }
 
-                .feedback-text.wrong {
-                    color: #ff3366;
-                }
+        .feedback-text.wrong {
+            color: #ff3366;
+        }
 
-                .feedback-score {
-                    font-size: clamp(16px, 3vw, 24px);
-                    font-weight: bold;
-                    background: rgba(0, 0, 0, 0.4);
-                    padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
-                    border-radius: 15px;
-                    display: inline-block;
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                }
+        .feedback-score {
+            font-size: clamp(16px, 3vw, 24px);
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.4);
+            padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
+            border-radius: 15px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-                .feedback-score.correct {
-                    color: #00ff88;
-                }
+        .feedback-score.correct {
+            color: #00ff88;
+        }
 
-                .feedback-score.wrong {
-                    color: #ff3366;
-                }
-            </style>
-            <div id="feedback-overlay">
-                <div id="feedback-box">
-                    <div id="feedback-icon"
-                        style="font-size: clamp(50px, 10vw, 80px); margin-bottom: clamp(10px, 2vw, 20px); filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));">
-                    </div>
-                    <div id="feedback-title" class="feedback-text"></div>
-                    <div id="feedback-detail"
-                        style="font-size: clamp(14px, 2.5vw, 18px); color: #d0e8ff; margin-bottom: clamp(15px, 3vw, 25px); line-height: 1.4;">
-                    </div>
-                    <div id="feedback-score" class="feedback-score"></div>
-                </div>
+        .feedback-score.wrong {
+            color: #ff3366;
+        }
+    </style>
+    <div id="feedback-overlay">
+        <div id="feedback-box">
+            <div id="feedback-icon"
+                style="font-size: clamp(50px, 10vw, 80px); margin-bottom: clamp(10px, 2vw, 20px); filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));">
             </div>
-
-            <!-- ========== NARRATION POPUP ========== -->
-            <div class="narration-popup" id="narration-popup">
-                <button class="narration-close" onclick="closeNarration()">&times;</button>
-                <div class="narration-text" id="narration-text"></div>
+            <div id="feedback-title" class="feedback-text"></div>
+            <div id="feedback-detail"
+                style="font-size: clamp(14px, 2.5vw, 18px); color: #d0e8ff; margin-bottom: clamp(15px, 3vw, 25px); line-height: 1.4;">
             </div>
+            <div id="feedback-score" class="feedback-score"></div>
+        </div>
+    </div>
 
-            <script>
-                // ========== GAME DATA ==========
-                const QUESTIONS = [
-                    {
-                        id: 1,
-                        planet: 'mars',
-                        question: 'Aku dikenal sebagai Planet Merah, memiliki gunung berapi raksasa. Siapakah aku?',
-                        correctFeedback: 'Keren! Kamu benar, itu Mars si planet merah!',
-                        voCorrect: 'Asset/audio/benar_mars.mp3',
-                        voSoal: 'Asset/audio/soal_mars.mp3'
-                    },
-                    {
-                        id: 2,
-                        planet: 'venus',
-                        question: 'Ukuran ku sedikit lebih kecil dari Bumi. Suhu ku lebih panas dari Merkurius karena lapisan karbondioksida tebal. Apakah aku?',
-                        correctFeedback: 'Tepat sekali! Itu adalah Venus si planet terpanas!',
-                        voCorrect: 'Asset/audio/benar_venus.mp3',
-                        voSoal: 'Asset/audio/soal_venus.mp3'
-                    },
-                    {
-                        id: 3,
-                        planet: 'jupiter',
-                        question: 'Aku adalah planet terbesar di tata surya, memiliki banyak bulan. Siapakah aku?',
-                        correctFeedback: 'Mantap! Jawabannya benar, itu planet Jupiter!',
-                        voCorrect: 'Asset/audio/benar_jupiter.mp3',
-                        voSoal: 'Asset/audio/soal_jupiter.mp3'
-                    },
-                    {
-                        id: 4,
-                        planet: 'merkurius',
-                        question: 'Aku adalah planet terkecil dan aku terletak dekat dengan Matahari. Apakah aku?',
-                        correctFeedback: 'Luar biasa! Kamu berhasil menebak planet Merkurius!',
-                        voCorrect: 'Asset/audio/benar_merkurius.mp3',
-                        voSoal: 'Asset/audio/soal_merkurius.mp3'
-                    },
-                    {
-                        id: 5,
-                        planet: 'bumi',
-                        question: 'Aku satu-satunya planet yang diketahui memiliki kehidupan. Memiliki air di permukaan dan atmosfer yang melindungi makhluk hidup. Siapakah aku?',
-                        correctFeedback: 'Keren! Kamu benar, itu rumah kita tercinta, Planet Bumi!',
-                        voCorrect: 'Asset/audio/benar_bumi.mp3',
-                        voSoal: 'Asset/audio/soal_bumi.mp3'
-                    },
-                    {
-                        id: 6,
-                        planet: 'saturnus',
-                        question: 'Aku terlihat sangat cantik dengan cincin besar yang melingkari tubuhku. Aku adalah planet raksasa gas yang paling ikonik di tata surya. Siapakah aku?',
-                        correctFeedback: 'Keren! Kamu benar, itu Saturnus si planet bercincin indah!',
-                        voCorrect: 'Asset/audio/benar_saturnus.mp3',
-                        voSoal: 'Asset/audio/soal_saturnus.mp3'
-                    },
-                    {
-                        id: 7,
-                        planet: 'uranus',
-                        question: 'Aku dikenal sebagai planet yang unik karena poros rotasiku yang miring sampai hampir rebah, sehingga aku seolah berguling di orbitku. Siapakah aku?',
-                        correctFeedback: 'Hebat! Itu memang planet Uranus yang berputar miring!',
-                        voCorrect: 'Asset/audio/benar_uranus.mp3',
-                        voSoal: 'Asset/audio/soal_uranus.mp3'
-                    },
-                    {
-                        id: 8,
-                        planet: 'neptunus',
-                        question: 'Aku adalah planet terjauh dari Matahari, sering disebut sebagai planet biru yang dingin dan berangin sangat kencang. Siapakah aku?',
-                        correctFeedback: 'Tepat sekali! Itu adalah Neptunus dengan angin badai terkuatnya!',
-                        voCorrect: 'Asset/audio/benar_neptunus.mp3',
-                        voSoal: 'Asset/audio/soal_neptunus.mp3'
-                    }
-                ];
+    <!-- ========== NARRATION POPUP ========== -->
+    <div class="narration-popup" id="narration-popup">
+        <button class="narration-close" onclick="closeNarration()">&times;</button>
+        <div class="narration-text" id="narration-text"></div>
+    </div>
 
-                const ORBIT_SIZES = [18, 24, 31, 38, 46, 54, 63, 72]; // percentage of container
-                const PLANET_NAMES = {
-                    merkurius: 'Merkurius',
-                    venus: 'Venus',
-                    bumi: 'Bumi',
-                    mars: 'Mars',
-                    jupiter: 'Jupiter',
-                    saturnus: 'Saturnus',
-                    uranus: 'Uranus',
-                    neptunus: 'Neptunus'
+    <script>
+        // ========== GAME DATA ==========
+        const QUESTIONS = [
+            {
+                id: 1,
+                planet: 'mars',
+                question: 'Aku dikenal sebagai Planet Merah, memiliki gunung berapi raksasa. Siapakah aku?',
+                correctFeedback: 'Keren! Kamu benar, itu Mars si planet merah!',
+                voCorrect: 'Asset/audio/benar_mars.mp3',
+                voSoal: 'Asset/audio/soal_mars.mp3'
+            },
+            {
+                id: 2,
+                planet: 'venus',
+                question: 'Ukuran ku sedikit lebih kecil dari Bumi. Suhu ku lebih panas dari Merkurius karena lapisan karbondioksida tebal. Apakah aku?',
+                correctFeedback: 'Tepat sekali! Itu adalah Venus si planet terpanas!',
+                voCorrect: 'Asset/audio/benar_venus.mp3',
+                voSoal: 'Asset/audio/soal_venus.mp3'
+            },
+            {
+                id: 3,
+                planet: 'jupiter',
+                question: 'Aku adalah planet terbesar di tata surya, memiliki banyak bulan. Siapakah aku?',
+                correctFeedback: 'Mantap! Jawabannya benar, itu planet Jupiter!',
+                voCorrect: 'Asset/audio/benar_jupiter.mp3',
+                voSoal: 'Asset/audio/soal_jupiter.mp3'
+            },
+            {
+                id: 4,
+                planet: 'merkurius',
+                question: 'Aku adalah planet terkecil dan aku terletak dekat dengan Matahari. Apakah aku?',
+                correctFeedback: 'Luar biasa! Kamu berhasil menebak planet Merkurius!',
+                voCorrect: 'Asset/audio/benar_merkurius.mp3',
+                voSoal: 'Asset/audio/soal_merkurius.mp3'
+            },
+            {
+                id: 5,
+                planet: 'bumi',
+                question: 'Aku satu-satunya planet yang diketahui memiliki kehidupan. Memiliki air di permukaan dan atmosfer yang melindungi makhluk hidup. Siapakah aku?',
+                correctFeedback: 'Keren! Kamu benar, itu rumah kita tercinta, Planet Bumi!',
+                voCorrect: 'Asset/audio/benar_bumi.mp3',
+                voSoal: 'Asset/audio/soal_bumi.mp3'
+            },
+            {
+                id: 6,
+                planet: 'saturnus',
+                question: 'Aku terlihat sangat cantik dengan cincin besar yang melingkari tubuhku. Aku adalah planet raksasa gas yang paling ikonik di tata surya. Siapakah aku?',
+                correctFeedback: 'Keren! Kamu benar, itu Saturnus si planet bercincin indah!',
+                voCorrect: 'Asset/audio/benar_saturnus.mp3',
+                voSoal: 'Asset/audio/soal_saturnus.mp3'
+            },
+            {
+                id: 7,
+                planet: 'uranus',
+                question: 'Aku dikenal sebagai planet yang unik karena poros rotasiku yang miring sampai hampir rebah, sehingga aku seolah berguling di orbitku. Siapakah aku?',
+                correctFeedback: 'Hebat! Itu memang planet Uranus yang berputar miring!',
+                voCorrect: 'Asset/audio/benar_uranus.mp3',
+                voSoal: 'Asset/audio/soal_uranus.mp3'
+            },
+            {
+                id: 8,
+                planet: 'neptunus',
+                question: 'Aku adalah planet terjauh dari Matahari, sering disebut sebagai planet biru yang dingin dan berangin sangat kencang. Siapakah aku?',
+                correctFeedback: 'Tepat sekali! Itu adalah Neptunus dengan angin badai terkuatnya!',
+                voCorrect: 'Asset/audio/benar_neptunus.mp3',
+                voSoal: 'Asset/audio/soal_neptunus.mp3'
+            }
+        ];
+
+        const ORBIT_SIZES = [18, 24, 31, 38, 46, 54, 63, 72]; // percentage of container
+        const PLANET_NAMES = {
+            merkurius: 'Merkurius',
+            venus: 'Venus',
+            bumi: 'Bumi',
+            mars: 'Mars',
+            jupiter: 'Jupiter',
+            saturnus: 'Saturnus',
+            uranus: 'Uranus',
+            neptunus: 'Neptunus'
+        };
+
+        // ========== STATE ==========
+        let score = 0;
+        let currentQuestion = 0;
+        let answered = false;
+        let dragData = null;
+        let audioCtx = null;
+        let voPembukaPlayed = false;
+
+        // ========== AUDIO ==========
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        function playSound(src) {
+            try {
+                const audioCtx = getAudioContext();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const audio = new Audio(src);
+                audio.volume = 0.7;
+                audio.play().catch(() => { });
+            } catch (e) { }
+        }
+
+        function playCorrectSfx() {
+            playSound('Asset/audio/correct.mp3');
+        }
+
+        function playWrongSfx() {
+            playSound('Asset/audio/wrong.mp3');
+        }
+
+        let bgmAudio = null;
+        let bgmFadeInterval = null;
+
+        function initBGM() {
+            if (!bgmAudio) {
+                bgmAudio = new Audio('Asset/audio/bgm-tech-loop.mp3');
+                bgmAudio.loop = true;
+                bgmAudio.volume = 0;
+            }
+        }
+
+        function fadeBGM(targetVolume, duration = 1000) {
+            initBGM();
+            if (!isMusicPlaying && targetVolume > 0) return; // Jangan fade-in jika dimute pengguna
+
+            clearInterval(bgmFadeInterval);
+
+            if (targetVolume > 0) {
+                bgmAudio.play().catch(() => { });
+            }
+
+            const step = 50;
+            const deltaVolume = (targetVolume - bgmAudio.volume) / (duration / step);
+
+            bgmFadeInterval = setInterval(() => {
+                let newVolume = bgmAudio.volume + deltaVolume;
+                if ((deltaVolume > 0 && newVolume >= targetVolume) || (deltaVolume < 0 && newVolume <= targetVolume)) {
+                    bgmAudio.volume = targetVolume;
+                    clearInterval(bgmFadeInterval);
+                    if (targetVolume === 0) bgmAudio.pause();
+                } else {
+                    bgmAudio.volume = Math.max(0, Math.min(1, newVolume));
+                }
+            }, step);
+        }
+
+        let currentVOAudio = null;
+
+        function stopVO() {
+            if (currentVOAudio) {
+                currentVOAudio.pause();
+                currentVOAudio.currentTime = 0;
+                currentVOAudio = null;
+            }
+            fadeBGM(0.3, 1000); // Naikkan volume BGM secara smooth saat VO berhenti
+        }
+
+        function playVO(src, onEnded = null) {
+            stopVO();
+            if (!src) {
+                if (onEnded) onEnded();
+                return;
+            }
+
+            fadeBGM(0, 500); // Matikan BGM secara smooth saat VO mau diputar
+
+            try {
+                const audioCtx = getAudioContext();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                currentVOAudio = new Audio(src);
+                currentVOAudio.volume = 0.7;
+
+                const handleVOEnd = () => {
+                    fadeBGM(0.3, 1000);
+                    if (onEnded) onEnded();
                 };
 
-                // ========== STATE ==========
-                let score = 0;
-                let currentQuestion = 0;
-                let answered = false;
-                let dragData = null;
-                let audioCtx = null;
-                let voPembukaPlayed = false;
+                currentVOAudio.addEventListener('ended', handleVOEnd);
+                currentVOAudio.addEventListener('error', handleVOEnd);
 
-                // ========== AUDIO ==========
-                function getAudioContext() {
-                    if (!audioCtx) {
-                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                currentVOAudio.play().catch(handleVOEnd);
+            } catch (e) {
+                fadeBGM(0.3, 1000);
+                if (onEnded) onEnded();
+            }
+        }
+
+        // ========== TOGGLE FUNCTIONS ==========
+        let isFullscreen = false;
+        function toggleFullscreen() {
+            if (!voPembukaPlayed) {
+                playVO('Asset/audio/vo_pembuka.mp3');
+                voPembukaPlayed = true;
+            }
+
+            if (!isFullscreen) {
+                try {
+                    const elem = document.documentElement;
+                    const req = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen;
+                    if (req) {
+                        const p = req.call(elem);
+                        if (p && p.catch) p.catch(() => { });
                     }
-                    return audioCtx;
+                } catch (e) {
+                    console.warn('Fullscreen error:', e);
                 }
-
-                function playSound(src) {
-                    try {
-                        const audioCtx = getAudioContext();
-                        if (audioCtx.state === 'suspended') {
-                            audioCtx.resume();
-                        }
-                        const audio = new Audio(src);
-                        audio.volume = 0.7;
-                        audio.play().catch(() => { });
-                    } catch (e) { }
-                }
-
-                function playCorrectSfx() {
-                    playSound('Asset/audio/correct.mp3');
-                }
-
-                function playWrongSfx() {
-                    playSound('Asset/audio/wrong.mp3');
-                }
-
-                let bgmAudio = null;
-                let bgmFadeInterval = null;
-
-                function initBGM() {
-                    if (!bgmAudio) {
-                        bgmAudio = new Audio('Asset/audio/bgm-tech-loop.mp3');
-                        bgmAudio.loop = true;
-                        bgmAudio.volume = 0;
+                isFullscreen = true;
+            } else {
+                try {
+                    const doc = document;
+                    const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+                    if (exit) {
+                        const p = exit.call(doc);
+                        if (p && p.catch) p.catch(() => { });
                     }
+                } catch (e) {
+                    console.warn('Exit fullscreen error:', e);
                 }
+                isFullscreen = false;
+            }
+        }
 
-                function fadeBGM(targetVolume, duration = 1000) {
-                    initBGM();
-                    if (!isMusicPlaying && targetVolume > 0) return; // Jangan fade-in jika dimute pengguna
+        function showFullscreenPrompt() {
+            const prompt = document.getElementById('fullscreen-prompt');
+            if (prompt) prompt.style.display = 'flex';
+        }
 
+        function enterFullscreenAndContinue() {
+            const prompt = document.getElementById('fullscreen-prompt');
+            if (prompt) prompt.style.display = 'none';
+            if (!isFullscreen) {
+                toggleFullscreen();
+            } else if (!voPembukaPlayed) {
+                playVO('Asset/audio/vo_pembuka.mp3');
+                voPembukaPlayed = true;
+            }
+            goToScreen('instructions-screen');
+        }
+
+        function skipFullscreenAndContinue() {
+            const prompt = document.getElementById('fullscreen-prompt');
+            if (prompt) prompt.style.display = 'none';
+            if (!voPembukaPlayed) {
+                playVO('Asset/audio/vo_pembuka.mp3');
+                voPembukaPlayed = true;
+            }
+            goToScreen('instructions-screen');
+        }
+
+        let isMusicPlaying = true;
+        function toggleMusic() {
+            isMusicPlaying = !isMusicPlaying;
+            const musicBtn = document.querySelector('.btn-music img');
+            if (isMusicPlaying) {
+                musicBtn.src = 'Asset/images/music-on.svg';
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') {
+                    ctx.resume();
+                }
+                // Jika tidak ada VO yang main, nyalakan kembali BGM
+                if (!currentVOAudio || currentVOAudio.paused) {
+                    fadeBGM(0.3, 500);
+                }
+            } else {
+                musicBtn.src = 'Asset/images/music-off.svg';
+                if (bgmAudio) {
                     clearInterval(bgmFadeInterval);
+                    bgmAudio.pause();
+                }
+            }
+        }
 
-                    if (targetVolume > 0) {
-                        bgmAudio.play().catch(() => { });
+        // ========== STARS ==========
+        function createStars() {
+            // Dinonaktifkan untuk meringankan performa
+        }
+
+        // ========== NAVIGATION ==========
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // ========== DRAG AND DROP ==========
+        function onDragStart(e) {
+            if (answered) { e.preventDefault(); return; }
+            const planet = e.target.closest('.planet-item');
+            if (!planet || planet.classList.contains('placed')) { e.preventDefault(); return; }
+
+            dragData = planet.dataset.planet;
+            planet.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', dragData);
+            e.dataTransfer.effectAllowed = 'move';
+
+            // Highlight orbits
+            document.querySelectorAll('.orbit-ring').forEach(r => r.classList.add('highlight'));
+        }
+
+        function onDragEnd(e) {
+            const planet = e.target.closest('.planet-item');
+            if (planet) planet.classList.remove('dragging');
+            document.querySelectorAll('.orbit-ring').forEach(r => r.classList.remove('highlight'));
+        }
+
+        function onOrbitDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function onOrbitDragLeave(e) {
+            // no-op
+        }
+
+        function onOrbitDrop(e) {
+            e.preventDefault();
+            if (answered) return;
+
+            const droppedPlanet = e.dataTransfer.getData('text/plain') || dragData;
+            if (droppedPlanet) {
+                const targetPlanet = getOrbitFromPoint(e.clientX, e.clientY);
+                checkAnswer(droppedPlanet, targetPlanet);
+            }
+            dragData = null;
+        }
+
+        // ========== TOUCH SUPPORT ==========
+        let touchClone = null;
+        let touchPlanet = null;
+        let touchRadius = 40;
+
+        function onTouchStart(e) {
+            if (answered) return;
+            const item = e.target.closest('.planet-item');
+            if (!item || item.classList.contains('placed')) return;
+
+            e.preventDefault(); // Mencegah browser melakukan native drag atau scroll yang mengganggu touchmove
+            touchPlanet = item.dataset.planet;
+            dragData = touchPlanet;
+
+            const touch = e.touches[0];
+            touchClone = item.cloneNode(true);
+            touchClone.classList.add('dragging');
+            touchClone.style.position = 'fixed';
+            touchClone.style.margin = '0';
+            touchClone.style.transition = 'none'; // CRITICAL: disable CSS transition so it follows finger instantly
+            touchClone.draggable = false; // Prevent native drag on the clone
+
+            touchRadius = (item.offsetWidth || 80) / 2;
+
+            touchClone.style.left = (touch.clientX - touchRadius) + 'px';
+            touchClone.style.top = (touch.clientY - touchRadius) + 'px';
+            touchClone.style.transform = 'scale(1.2)';
+            touchClone.style.zIndex = '999999';
+            touchClone.style.pointerEvents = 'none';
+            document.body.appendChild(touchClone);
+
+            document.querySelectorAll('.orbit-ring').forEach(r => r.classList.add('highlight'));
+
+            // Memasang event listener ke document agar mengikuti jari di manapun di layar
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd, { passive: false });
+        }
+
+        function onTouchMove(e) {
+            if (!touchClone) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchClone.style.left = (touch.clientX - touchRadius) + 'px';
+            touchClone.style.top = (touch.clientY - touchRadius) + 'px';
+        }
+
+        function onTouchEnd(e) {
+            // Hapus listener dari document
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onTouchEnd);
+
+            if (!touchClone || !touchPlanet) return;
+            const touch = e.changedTouches[0];
+            touchClone.remove();
+            touchClone = null;
+
+            const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (targetEl && targetEl.closest('#scene-3d-screen') && !targetEl.closest('#planet-inventory')) {
+                checkAnswer(touchPlanet);
+            }
+
+            touchPlanet = null;
+        }
+
+        // ========== GAME LOGIC ==========
+
+        function createPlanetInventory() {
+            const container = document.getElementById('planet-inventory');
+            container.innerHTML = '';
+            const planets = Object.keys(PLANET_NAMES);
+
+            // Selalu acak posisi opsi planet (Fisher-Yates shuffle)
+            for (let i = planets.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [planets[i], planets[j]] = [planets[j], planets[i]];
+            }
+
+            planets.forEach(planet => {
+                const item = document.createElement('div');
+                item.className = 'planet-item ' + planet;
+                item.dataset.planet = planet;
+                item.draggable = true;
+
+                item.addEventListener('dragstart', onDragStart);
+                item.addEventListener('dragend', onDragEnd);
+                item.addEventListener('touchstart', onTouchStart, { passive: false });
+
+                // Support both double-click and rapid double-tap/click
+                let lastClickTime = 0;
+                item.addEventListener('click', (e) => {
+                    const now = Date.now();
+                    if (now - lastClickTime < 450) {
+                        e.stopPropagation();
+                        checkAnswer(planet);
                     }
+                    lastClickTime = now;
+                });
+                item.addEventListener('dblclick', (e) => {
+                    e.stopPropagation();
+                    checkAnswer(planet);
+                });
 
-                    const step = 50;
-                    const deltaVolume = (targetVolume - bgmAudio.volume) / (duration / step);
+                const label = document.createElement('span');
+                label.className = 'planet-label';
+                label.textContent = PLANET_NAMES[planet];
+                item.appendChild(label);
+                container.appendChild(item);
+            });
+        }
 
-                    bgmFadeInterval = setInterval(() => {
-                        let newVolume = bgmAudio.volume + deltaVolume;
-                        if ((deltaVolume > 0 && newVolume >= targetVolume) || (deltaVolume < 0 && newVolume <= targetVolume)) {
-                            bgmAudio.volume = targetVolume;
-                            clearInterval(bgmFadeInterval);
-                            if (targetVolume === 0) bgmAudio.pause();
-                        } else {
-                            bgmAudio.volume = Math.max(0, Math.min(1, newVolume));
-                        }
-                    }, step);
+        function startGame() {
+            stopVO();
+            goToScreen('scene-3d-screen');
+            if (!window.is3DInitialized) {
+                init3DScene();
+                window.is3DInitialized = true;
+            }
+
+            score = 0;
+            currentQuestion = 0;
+
+            // Shuffle QUESTIONS array
+            for (let i = QUESTIONS.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [QUESTIONS[i], QUESTIONS[j]] = [QUESTIONS[j], QUESTIONS[i]];
+            }
+
+            const scorePopup = document.getElementById('final-score-popup');
+            if (scorePopup) scorePopup.style.display = 'none';
+            const planetInventory = document.getElementById('planet-inventory');
+            if (planetInventory) planetInventory.style.display = 'grid';
+            const soalContainer = document.getElementById('soal-container-3d');
+            if (soalContainer) soalContainer.style.display = 'flex';
+
+            // Reset planet visibility jika mengulang permainan
+            if (window.scenePlanets) {
+                Object.values(window.scenePlanets).forEach(p => p.visible = false);
+            }
+            if (window.sceneSunElements) {
+                window.sceneSunElements.forEach(el => { if (el) el.visible = true; });
+            }
+            if (window.controls) {
+                window.controls.target.set(0, 0, 0);
+                window.controls.update();
+            }
+
+            createPlanetInventory();
+            setupGame();
+        }
+
+        function init3DScene() {
+            const scene = new THREE.Scene();
+
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.set(0, 150, 300);
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            window.controls = controls;
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 40;
+            controls.maxDistance = 800;
+
+            const ambientLight = new THREE.AmbientLight(0x333333);
+            scene.add(ambientLight);
+
+            const sunLight = new THREE.PointLight(0xffffff, 2, 1000);
+            sunLight.position.set(0, 0, 0);
+            scene.add(sunLight);
+
+            const starsGeometry = new THREE.BufferGeometry();
+            const starsCount = 2000;
+            const posArray = new Float32Array(starsCount * 3);
+            for (let i = 0; i < starsCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 1500;
+            }
+            starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            // Membuat tekstur bulat bercahaya untuk partikel agar tidak terlihat kotak
+            const canvas = document.createElement('canvas');
+            canvas.width = 16;
+            canvas.height = 16;
+            const context = canvas.getContext('2d');
+            const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
+            gradient.addColorStop(0, 'rgba(255,255,255,1)');
+            gradient.addColorStop(1, 'rgba(255,255,255,0)');
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, 16, 16);
+            const particleTexture = new THREE.CanvasTexture(canvas);
+
+            const starsMaterial = new THREE.PointsMaterial({
+                size: 0.8,
+                map: particleTexture,
+                color: 0x88ccff,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            const starsMesh = new THREE.Points(starsGeometry, starsMaterial);
+            scene.add(starsMesh);
+
+            const textureLoader = new THREE.TextureLoader();
+            const textureBase = 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/';
+
+            const planetData = [
+                { name: 'Merkurius', size: 3.5, distance: 35, speed: 0.02, map: textureBase + 'moon_1024.jpg' },
+                { name: 'Venus', size: 4.5, distance: 50, speed: 0.015, map: textureBase + 'earth_clouds_1024.png' },
+                { name: 'Bumi', size: 5, distance: 70, speed: 0.01, map: textureBase + 'earth_atmos_2048.jpg' },
+                { name: 'Mars', size: 4, distance: 95, speed: 0.008, map: 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Mars_equirectangular_projection.jpg' },
+                { name: 'Jupiter', size: 12, distance: 140, speed: 0.005, map: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg' },
+                { name: 'Saturnus', size: 10, distance: 190, speed: 0.004, map: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Saturn_%28planet%29_large.jpg' },
+                { name: 'Uranus', size: 7, distance: 240, speed: 0.003, map: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Uranus_System.jpg' },
+                { name: 'Neptunus', size: 7, distance: 280, speed: 0.002, map: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Neptune.jpg' }
+            ];
+
+            // Helper to get texture with base64 Data URL (immune to local file:/// CORS)
+            function loadSafeTexture(key, fallbackPath) {
+                if (typeof PLANET_TEXTURES_DATA !== 'undefined' && PLANET_TEXTURES_DATA[key]) {
+                    return textureLoader.load(PLANET_TEXTURES_DATA[key]);
+                }
+                return textureLoader.load(fallbackPath);
+            }
+
+            // Procedural vibrant solar surface canvas texture (instant load, 0s delay, offline ready)
+            function createSunSurfaceTexture() {
+                const canvas = document.createElement('canvas');
+                canvas.width = 512;
+                canvas.height = 256;
+                const ctx = canvas.getContext('2d');
+
+                // Dynamic solar plasma gradient
+                const grad = ctx.createLinearGradient(0, 0, 512, 256);
+                grad.addColorStop(0, '#fff4cc');
+                grad.addColorStop(0.2, '#ffbb11');
+                grad.addColorStop(0.5, '#ff7700');
+                grad.addColorStop(0.8, '#ff4400');
+                grad.addColorStop(1, '#ffaa00');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 512, 256);
+
+                // Granulation & solar flare spots
+                for (let i = 0; i < 350; i++) {
+                    const x = Math.random() * 512;
+                    const y = Math.random() * 256;
+                    const r = 2 + Math.random() * 16;
+                    const fGrad = ctx.createRadialGradient(x, y, 0, x, y, r);
+                    fGrad.addColorStop(0, 'rgba(255, 255, 230, 0.7)');
+                    fGrad.addColorStop(0.4, 'rgba(255, 170, 0, 0.4)');
+                    fGrad.addColorStop(1, 'rgba(255, 60, 0, 0)');
+                    ctx.fillStyle = fGrad;
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.fill();
                 }
 
-                let currentVOAudio = null;
-
-                function stopVO() {
-                    if (currentVOAudio) {
-                        currentVOAudio.pause();
-                        currentVOAudio.currentTime = 0;
-                        currentVOAudio = null;
-                    }
-                    fadeBGM(0.3, 1000); // Naikkan volume BGM secara smooth saat VO berhenti
+                // Solar bands
+                for (let j = 0; j < 6; j++) {
+                    ctx.fillStyle = 'rgba(255, 220, 80, 0.15)';
+                    ctx.fillRect(0, Math.random() * 256, 512, 10 + Math.random() * 25);
                 }
 
-                function playVO(src, onEnded = null) {
-                    stopVO();
-                    if (!src) {
-                        if (onEnded) onEnded();
-                        return;
-                    }
+                const tex = new THREE.CanvasTexture(canvas);
+                tex.wrapS = THREE.RepeatWrapping;
+                tex.wrapT = THREE.ClampToEdgeWrapping;
+                return tex;
+            }
 
-                    fadeBGM(0, 500); // Matikan BGM secara smooth saat VO mau diputar
+            // 1. Bola 3D Matahari Utama (Proporsional agar tidak menutupi orbit Merkurius)
+            const sunTex = createSunSurfaceTexture();
+            const sunGeo = new THREE.SphereGeometry(9, 36, 36);
+            const sunMat = new THREE.MeshBasicMaterial({
+                map: sunTex,
+                color: 0xffffff
+            });
+            const sunSphere = new THREE.Mesh(sunGeo, sunMat);
+            scene.add(sunSphere);
 
-                    try {
-                        const audioCtx = getAudioContext();
-                        if (audioCtx.state === 'suspended') {
-                            audioCtx.resume();
-                        }
-                        currentVOAudio = new Audio(src);
-                        currentVOAudio.volume = 0.7;
+            // 2. Inti Bercahaya (Glow Core Halo Atmosphere)
+            const glowGeo = new THREE.SphereGeometry(10.5, 32, 32);
+            const glowMat = new THREE.MeshBasicMaterial({
+                color: 0xffaa00,
+                transparent: true,
+                opacity: 0.45,
+                side: THREE.BackSide,
+                blending: THREE.AdditiveBlending
+            });
+            const glowSphere = new THREE.Mesh(glowGeo, glowMat);
+            scene.add(glowSphere);
 
-                        const handleVOEnd = () => {
-                            fadeBGM(0.3, 1000);
-                            if (onEnded) onEnded();
-                        };
+            // 3. Efek Rotasi Berkas Sinar (Rotating Solar Rays Corona)
+            const sunRaysTex = loadSafeTexture('matahari', 'Asset/motion/solar-system-main/images/matahari.png');
 
-                        currentVOAudio.addEventListener('ended', handleVOEnd);
-                        currentVOAudio.addEventListener('error', handleVOEnd);
+            // Layer 1 Berkas Sinar
+            const raysMat1 = new THREE.SpriteMaterial({
+                map: sunRaysTex,
+                transparent: true,
+                opacity: 0.9,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            const sunRays1 = new THREE.Sprite(raysMat1);
+            sunRays1.scale.set(30, 30, 1);
+            scene.add(sunRays1);
 
-                        currentVOAudio.play().catch(handleVOEnd);
-                    } catch (e) {
-                        fadeBGM(0.3, 1000);
-                        if (onEnded) onEnded();
-                    }
+            // Layer 2 Berkas Sinar Luar (Aura Berlawanan Arah)
+            const raysMat2 = new THREE.SpriteMaterial({
+                map: sunRaysTex,
+                transparent: true,
+                opacity: 0.45,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            const sunRays2 = new THREE.Sprite(raysMat2);
+            sunRays2.scale.set(36, 36, 1);
+            scene.add(sunRays2);
+
+            window.sceneSunElements = [sunSphere, glowSphere, sunRays1, sunRays2];
+            window.sceneSun = sunSphere;
+
+            // Drag & drop directly on Three.js canvas
+            renderer.domElement.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+            });
+            renderer.domElement.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const p = (e.dataTransfer && e.dataTransfer.getData('text/plain')) || dragData;
+                if (p) {
+                    checkAnswer(p);
+                }
+                dragData = null;
+            });
+
+            // Double click on canvas resets camera view smoothly without hiding the sun
+            renderer.domElement.addEventListener('dblclick', (e) => {
+                e.preventDefault();
+                camera.position.set(0, 150, 300);
+                controls.target.set(0, 0, 0);
+                controls.update();
+                if (window.sceneSunElements) {
+                    window.sceneSunElements.forEach(el => { if (el) el.visible = true; });
+                }
+            });
+
+            window.sceneOrbits = {};
+            window.scenePlanets = {};
+
+            const planets = [];
+
+            planetData.forEach(data => {
+                const planetId = data.name.toLowerCase();
+
+                const orbitGeo = new THREE.RingGeometry(data.distance - 0.2, data.distance + 0.2, 64);
+                const orbitMat = new THREE.MeshBasicMaterial({ color: 0x4af0c8, side: THREE.DoubleSide, transparent: true, opacity: 0.2 });
+                const orbitRing = new THREE.Mesh(orbitGeo, orbitMat);
+                orbitRing.rotation.x = Math.PI / 2;
+                orbitRing.scale.y = 0.75;
+                scene.add(orbitRing);
+                window.sceneOrbits[planetId] = orbitRing;
+
+                const spriteMap = loadSafeTexture(planetId, `Asset/motion/solar-system-main/images/${getGifName(planetId)}`);
+                const spriteMaterial = new THREE.SpriteMaterial({ map: spriteMap, transparent: true });
+                const sprite = new THREE.Sprite(spriteMaterial);
+
+                // Scale the sprite based on the planet's defined size
+                // Multiplying by 2.5 to match the visual diameter of the previous spheres
+                sprite.scale.set(data.size * 2.5, data.size * 2.5, 1);
+                sprite.visible = false; // Hidden initially
+
+                scene.add(sprite);
+                window.scenePlanets[planetId] = sprite;
+
+                planets.push({
+                    mesh: sprite,
+                    distance: data.distance,
+                    speed: data.speed,
+                    angle: Math.random() * Math.PI * 2
+                });
+            });
+
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                // 1. Bola 3D Matahari berputar pada porosnya
+                if (sunSphere) {
+                    sunSphere.rotation.y += 0.003;
                 }
 
-                // ========== TOGGLE FUNCTIONS ==========
-                let isFullscreen = false;
-                function toggleFullscreen() {
-                    if (!voPembukaPlayed) {
-                        playVO('Asset/audio/vo_pembuka.mp3');
-                        voPembukaPlayed = true;
-                    }
-
-                    if (!isFullscreen) {
-                        try {
-                            const elem = document.documentElement;
-                            const req = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen;
-                            if (req) {
-                                const p = req.call(elem);
-                                if (p && p.catch) p.catch(() => { });
-                            }
-                        } catch (e) {
-                            console.warn('Fullscreen error:', e);
-                        }
-                        isFullscreen = true;
-                    } else {
-                        try {
-                            const doc = document;
-                            const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-                            if (exit) {
-                                const p = exit.call(doc);
-                                if (p && p.catch) p.catch(() => { });
-                            }
-                        } catch (e) {
-                            console.warn('Exit fullscreen error:', e);
-                        }
-                        isFullscreen = false;
-                    }
+                // 2. Inti bercahaya berdenyut lembut (pulsating glow core)
+                if (glowSphere) {
+                    const pulse = 1 + Math.sin(elapsedTime * 2.5) * 0.035;
+                    glowSphere.scale.set(pulse, pulse, pulse);
                 }
 
-                        function showFullscreenPrompt() {
-                            const prompt = document.getElementById('fullscreen-prompt');
-                            if (prompt) prompt.style.display = 'flex';
-                        }
-
-                        function enterFullscreenAndContinue() {
-                            const prompt = document.getElementById('fullscreen-prompt');
-                            if (prompt) prompt.style.display = 'none';
-                            if (!isFullscreen) {
-                                toggleFullscreen();
-                            } else if (!voPembukaPlayed) {
-                                playVO('Asset/audio/vo_pembuka.mp3');
-                                voPembukaPlayed = true;
-                            }
-                            goToScreen('instructions-screen');
-                        }
-
-                        function skipFullscreenAndContinue() {
-                            const prompt = document.getElementById('fullscreen-prompt');
-                            if (prompt) prompt.style.display = 'none';
-                            if (!voPembukaPlayed) {
-                                playVO('Asset/audio/vo_pembuka.mp3');
-                                voPembukaPlayed = true;
-                            }
-                            goToScreen('instructions-screen');
-                        }
-
-                        let isMusicPlaying = true;
-                        function toggleMusic() {
-                            isMusicPlaying = !isMusicPlaying;
-                            const musicBtn = document.querySelector('.btn-music img');
-                            if (isMusicPlaying) {
-                                musicBtn.src = 'Asset/images/music-on.svg';
-                                const ctx = getAudioContext();
-                                if (ctx.state === 'suspended') {
-                                    ctx.resume();
-                                }
-                                // Jika tidak ada VO yang main, nyalakan kembali BGM
-                                if (!currentVOAudio || currentVOAudio.paused) {
-                                    fadeBGM(0.3, 500);
-                                }
-                            } else {
-                                musicBtn.src = 'Asset/images/music-off.svg';
-                                if (bgmAudio) {
-                                    clearInterval(bgmFadeInterval);
-                                    bgmAudio.pause();
-                                }
-                            }
-                        }
-
-                        // ========== STARS ==========
-                        function createStars() {
-                            // Dinonaktifkan untuk meringankan performa
-                        }
-
-                        // ========== NAVIGATION ==========
-                        function goToScreen(screenId) {
-                            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-                            document.getElementById(screenId).classList.add('active');
-                        }
-
-                        // ========== DRAG AND DROP ==========
-                        function onDragStart(e) {
-                            if (answered) { e.preventDefault(); return; }
-                            const planet = e.target.closest('.planet-item');
-                            if (!planet || planet.classList.contains('placed')) { e.preventDefault(); return; }
-
-                            dragData = planet.dataset.planet;
-                            planet.classList.add('dragging');
-                            e.dataTransfer.setData('text/plain', dragData);
-                            e.dataTransfer.effectAllowed = 'move';
-
-                            // Highlight orbits
-                            document.querySelectorAll('.orbit-ring').forEach(r => r.classList.add('highlight'));
-                        }
-
-                        function onDragEnd(e) {
-                            const planet = e.target.closest('.planet-item');
-                            if (planet) planet.classList.remove('dragging');
-                            document.querySelectorAll('.orbit-ring').forEach(r => r.classList.remove('highlight'));
-                        }
-
-                        function onOrbitDragOver(e) {
-                            e.preventDefault();
-                            e.dataTransfer.dropEffect = 'move';
-                        }
-
-                        function onOrbitDragLeave(e) {
-                            // no-op
-                        }
-
-                        function onOrbitDrop(e) {
-                            e.preventDefault();
-                            if (answered) return;
-
-                            const droppedPlanet = e.dataTransfer.getData('text/plain') || dragData;
-                            if (droppedPlanet) {
-                                const targetPlanet = getOrbitFromPoint(e.clientX, e.clientY);
-                                checkAnswer(droppedPlanet, targetPlanet);
-                            }
-                            dragData = null;
-                        }
-
-                        // ========== TOUCH SUPPORT ==========
-                        let touchClone = null;
-                        let touchPlanet = null;
-                        let touchRadius = 40;
-
-                        function onTouchStart(e) {
-                            if (answered) return;
-                            const item = e.target.closest('.planet-item');
-                            if (!item || item.classList.contains('placed')) return;
-
-                            e.preventDefault(); // Mencegah browser melakukan native drag atau scroll yang mengganggu touchmove
-                            touchPlanet = item.dataset.planet;
-                            dragData = touchPlanet;
-
-                            const touch = e.touches[0];
-                            touchClone = item.cloneNode(true);
-                            touchClone.classList.add('dragging');
-                            touchClone.style.position = 'fixed';
-                            touchClone.style.margin = '0';
-                            touchClone.style.transition = 'none'; // CRITICAL: disable CSS transition so it follows finger instantly
-                            touchClone.draggable = false; // Prevent native drag on the clone
-
-                            touchRadius = (item.offsetWidth || 80) / 2;
-
-                            touchClone.style.left = (touch.clientX - touchRadius) + 'px';
-                            touchClone.style.top = (touch.clientY - touchRadius) + 'px';
-                            touchClone.style.transform = 'scale(1.2)';
-                            touchClone.style.zIndex = '999999';
-                            touchClone.style.pointerEvents = 'none';
-                            document.body.appendChild(touchClone);
-
-                            document.querySelectorAll('.orbit-ring').forEach(r => r.classList.add('highlight'));
-
-                            // Memasang event listener ke document agar mengikuti jari di manapun di layar
-                            document.addEventListener('touchmove', onTouchMove, { passive: false });
-                            document.addEventListener('touchend', onTouchEnd, { passive: false });
-                        }
-
-                        function onTouchMove(e) {
-                            if (!touchClone) return;
-                            e.preventDefault();
-                            const touch = e.touches[0];
-                            touchClone.style.left = (touch.clientX - touchRadius) + 'px';
-                            touchClone.style.top = (touch.clientY - touchRadius) + 'px';
-                        }
-
-                        function onTouchEnd(e) {
-                            // Hapus listener dari document
-                            document.removeEventListener('touchmove', onTouchMove);
-                            document.removeEventListener('touchend', onTouchEnd);
-
-                            if (!touchClone || !touchPlanet) return;
-                            const touch = e.changedTouches[0];
-                            touchClone.remove();
-                            touchClone = null;
-
-                            const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
-                            if (targetEl && targetEl.closest('#scene-3d-screen') && !targetEl.closest('#planet-inventory')) {
-                                checkAnswer(touchPlanet);
-                            }
-
-                            touchPlanet = null;
-                        }
-
-                        // ========== GAME LOGIC ==========
-
-                        function createPlanetInventory() {
-                            const container = document.getElementById('planet-inventory');
-                            container.innerHTML = '';
-                            const planets = Object.keys(PLANET_NAMES);
-                            planets.forEach(planet => {
-                                const item = document.createElement('div');
-                                item.className = 'planet-item ' + planet;
-                                item.dataset.planet = planet;
-                                item.draggable = true;
-
-                                item.addEventListener('dragstart', onDragStart);
-                                item.addEventListener('dragend', onDragEnd);
-                                item.addEventListener('touchstart', onTouchStart, { passive: false });
-
-                                const label = document.createElement('span');
-                                label.className = 'planet-label';
-                                label.textContent = PLANET_NAMES[planet];
-                                item.appendChild(label);
-                                container.appendChild(item);
-                            });
-                        }
-
-                        function startGame() {
-                            stopVO();
-                            goToScreen('scene-3d-screen');
-                            if (!window.is3DInitialized) {
-                                init3DScene();
-                                window.is3DInitialized = true;
-                            }
-
-                            score = 0;
-                            currentQuestion = 0;
-
-                            // Shuffle QUESTIONS array
-                            for (let i = QUESTIONS.length - 1; i > 0; i--) {
-                                const j = Math.floor(Math.random() * (i + 1));
-                                [QUESTIONS[i], QUESTIONS[j]] = [QUESTIONS[j], QUESTIONS[i]];
-                            }
-
-                            const scorePopup = document.getElementById('final-score-popup');
-                            if (scorePopup) scorePopup.style.display = 'none';
-                            const planetInventory = document.getElementById('planet-inventory');
-                            if (planetInventory) planetInventory.style.display = 'grid';
-                            const soalContainer = document.getElementById('soal-container-3d');
-                            if (soalContainer) soalContainer.style.display = 'flex';
-
-                            // Reset planet visibility jika mengulang permainan
-                            if (window.scenePlanets) {
-                                Object.values(window.scenePlanets).forEach(p => p.visible = false);
-                            }
-
-                            createPlanetInventory();
-                            setupGame();
-                        }
-
-                        function init3DScene() {
-                            const scene = new THREE.Scene();
-
-                            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
-                            camera.position.set(0, 150, 300);
-
-                            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                            renderer.setSize(window.innerWidth, window.innerHeight);
-                            renderer.setPixelRatio(window.devicePixelRatio);
-                            document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-                            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-                            controls.enableDamping = true;
-                            controls.dampingFactor = 0.05;
-                            controls.minDistance = 50;
-                            controls.maxDistance = 800;
-
-                            const ambientLight = new THREE.AmbientLight(0x333333);
-                            scene.add(ambientLight);
-
-                            const sunLight = new THREE.PointLight(0xffffff, 2, 1000);
-                            sunLight.position.set(0, 0, 0);
-                            scene.add(sunLight);
-
-                            const starsGeometry = new THREE.BufferGeometry();
-                            const starsCount = 2000;
-                            const posArray = new Float32Array(starsCount * 3);
-                            for (let i = 0; i < starsCount * 3; i++) {
-                                posArray[i] = (Math.random() - 0.5) * 1500;
-                            }
-                            starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-                            // Membuat tekstur bulat bercahaya untuk partikel agar tidak terlihat kotak
-                            const canvas = document.createElement('canvas');
-                            canvas.width = 16;
-                            canvas.height = 16;
-                            const context = canvas.getContext('2d');
-                            const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
-                            gradient.addColorStop(0, 'rgba(255,255,255,1)');
-                            gradient.addColorStop(1, 'rgba(255,255,255,0)');
-                            context.fillStyle = gradient;
-                            context.fillRect(0, 0, 16, 16);
-                            const particleTexture = new THREE.CanvasTexture(canvas);
-
-                            const starsMaterial = new THREE.PointsMaterial({
-                                size: 0.8,
-                                map: particleTexture,
-                                color: 0x88ccff,
-                                transparent: true,
-                                opacity: 0.8,
-                                blending: THREE.AdditiveBlending,
-                                depthWrite: false
-                            });
-                            const starsMesh = new THREE.Points(starsGeometry, starsMaterial);
-                            scene.add(starsMesh);
-
-                            const textureLoader = new THREE.TextureLoader();
-                            const textureBase = 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/';
-
-                            const planetData = [
-                                { name: 'Merkurius', size: 3, distance: 35, speed: 0.02, map: textureBase + 'moon_1024.jpg' },
-                                { name: 'Venus', size: 4.5, distance: 50, speed: 0.015, map: textureBase + 'earth_clouds_1024.png' },
-                                { name: 'Bumi', size: 5, distance: 70, speed: 0.01, map: textureBase + 'earth_atmos_2048.jpg' },
-                                { name: 'Mars', size: 4, distance: 95, speed: 0.008, map: 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Mars_equirectangular_projection.jpg' },
-                                { name: 'Jupiter', size: 12, distance: 140, speed: 0.005, map: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg' },
-                                { name: 'Saturnus', size: 10, distance: 190, speed: 0.004, map: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Saturn_%28planet%29_large.jpg' },
-                                { name: 'Uranus', size: 7, distance: 240, speed: 0.003, map: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Uranus_System.jpg' },
-                                { name: 'Neptunus', size: 7, distance: 280, speed: 0.002, map: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Neptune.jpg' }
-                            ];
-
-                            const sunGeo = new THREE.SphereGeometry(18, 32, 32);
-                            const sunMat = new THREE.MeshBasicMaterial({
-                                map: textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/9/99/Map_of_the_full_sun.jpg'),
-                                color: 0xffddaa
-                            });
-                            const sun = new THREE.Mesh(sunGeo, sunMat);
-                            scene.add(sun);
-
-                            window.sceneOrbits = {};
-                            window.scenePlanets = {};
-
-                            const planets = [];
-
-                            planetData.forEach(data => {
-                                const planetId = data.name.toLowerCase();
-
-                                const orbitGeo = new THREE.RingGeometry(data.distance - 0.2, data.distance + 0.2, 64);
-                                const orbitMat = new THREE.MeshBasicMaterial({ color: 0x4af0c8, side: THREE.DoubleSide, transparent: true, opacity: 0.2 });
-                                const orbitRing = new THREE.Mesh(orbitGeo, orbitMat);
-                                orbitRing.rotation.x = Math.PI / 2;
-                                orbitRing.scale.y = 0.75;
-                                scene.add(orbitRing);
-                                window.sceneOrbits[planetId] = orbitRing;
-
-                                const spriteMap = textureLoader.load(`Asset/motion/solar-system-main/images/${getGifName(planetId)}`);
-                                const spriteMaterial = new THREE.SpriteMaterial({ map: spriteMap, transparent: true });
-                                const sprite = new THREE.Sprite(spriteMaterial);
-
-                                // Scale the sprite based on the planet's defined size
-                                // Multiplying by 2.5 to match the visual diameter of the previous spheres
-                                sprite.scale.set(data.size * 2.5, data.size * 2.5, 1);
-                                sprite.visible = false; // Hidden initially
-
-                                scene.add(sprite);
-                                window.scenePlanets[planetId] = sprite;
-
-                                planets.push({
-                                    mesh: sprite,
-                                    distance: data.distance,
-                                    speed: data.speed,
-                                    angle: Math.random() * Math.PI * 2
-                                });
-                            });
-
-                            const clock = new THREE.Clock();
-
-                            function animate() {
-                                requestAnimationFrame(animate);
-                                sun.rotation.y += 0.002;
-                                planets.forEach(p => {
-                                    if (p.mesh.visible) {
-                                        p.angle += p.speed;
-                                        p.mesh.position.x = Math.cos(p.angle) * p.distance;
-                                        p.mesh.position.z = Math.sin(p.angle) * (p.distance * 0.75);
-                                        p.mesh.rotation.y += 0.02;
-                                    }
-                                });
-                                starsMesh.rotation.y -= 0.0005;
-                                controls.update();
-                                renderer.render(scene, camera);
-                            }
-
-                            animate();
-
-                            window.addEventListener('resize', () => {
-                                camera.aspect = window.innerWidth / window.innerHeight;
-                                camera.updateProjectionMatrix();
-                                renderer.setSize(window.innerWidth, window.innerHeight);
-                            });
-                        }
-
-                        function setupGame() {
-                            answered = false;
-                            const q = QUESTIONS[currentQuestion];
-
-                            // Update UI
-                            const questionText = document.getElementById('question-text-3d');
-                            questionText.innerHTML = q.question;
-                            questionText.style.fontSize = "";
-                            const badge = document.getElementById('soal-badge-title');
-                            if (badge) badge.textContent = "MISI DETEKTIF";
-
-                            // Play VO soal
-                            playVO(q.voSoal);
-
-                            // Highlight the active orbit in 3D
-                            if (window.sceneOrbits) {
-                                Object.values(window.sceneOrbits).forEach(ring => {
-                                    ring.material.color.setHex(0x4af0c8); // Default cyan
-                                    ring.material.opacity = 0.2;
-                                });
-
-                                const activeRing = window.sceneOrbits[q.planet];
-                                if (activeRing) {
-                                    activeRing.material.color.setHex(0xffffff); // Highlight white
-                                    activeRing.material.opacity = 0.8;
-                                }
-                            }
-                        }
-
-                        function checkAnswer(droppedPlanet) {
-                            if (answered) return;
-
-                            const q = QUESTIONS[currentQuestion];
-
-                            if (droppedPlanet !== q.planet) {
-                                playWrongSfx();
-                                showFeedback(false, 'Ups! Planet yang kamu pilih belum tepat.', 'Coba lagi!');
-                                return;
-                            }
-
-                            answered = true;
-                            // CORRECT
-                            score += 12.5;
-                            playCorrectSfx();
-                            playVO(q.voCorrect, () => {
-                                const overlay = document.getElementById('feedback-overlay');
-                                overlay.classList.remove('active');
-                                nextQuestion();
-                            });
-
-                            // Mark planet in inventory as placed
-                            const planetItem = document.querySelector(`.planet-item[data-planet="${droppedPlanet}"]`);
-                            if (planetItem) planetItem.classList.add('placed');
-
-                            // Spawn the 3D planet on its orbit
-                            if (window.scenePlanets && window.scenePlanets[droppedPlanet]) {
-                                window.scenePlanets[droppedPlanet].visible = true;
-                            }
-
-                            // Jadikan warna orbit seragam dengan yang lain (biru pudar)
-                            if (window.sceneOrbits && window.sceneOrbits[droppedPlanet]) {
-                                window.sceneOrbits[droppedPlanet].material.color.setHex(0x4af0c8);
-                                window.sceneOrbits[droppedPlanet].material.opacity = 0.2;
-                            }
-
-                            showFeedback(true, q.correctFeedback, '+12,5 poin');
-                        }
-
-                        function getGifName(planet) {
-                            const map = {
-                                merkurius: 'merkurius.png',
-                                venus: 'venus.png',
-                                bumi: 'Bumi.png',
-                                mars: 'mars.png',
-                                jupiter: 'jupiter.png',
-                                saturnus: 'saturnus.png',
-                                uranus: 'uranus.png',
-                                neptunus: 'neptunus.png'
-                            };
-                            return map[planet] || planet + '.png';
-                        }
-
-                        function showFeedback(isCorrect, text, scoreText) {
-                            const overlay = document.getElementById('feedback-overlay');
-                            const box = document.getElementById('feedback-box');
-                            const icon = document.getElementById('feedback-icon');
-                            const title = document.getElementById('feedback-title');
-                            const detail = document.getElementById('feedback-detail');
-                            const scoreEl = document.getElementById('feedback-score');
-
-                            box.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
-                            title.className = 'feedback-text ' + (isCorrect ? 'correct' : 'wrong');
-                            scoreEl.className = 'feedback-score ' + (isCorrect ? 'correct' : 'wrong');
-
-                            icon.textContent = isCorrect ? '\u2705' : '\u274C';
-                            title.textContent = isCorrect ? 'BENAR!' : 'SALAH!';
-                            detail.textContent = text;
-                            scoreEl.textContent = scoreText;
-
-                            overlay.classList.add('active');
-
-                            if (!isCorrect) {
-                                setTimeout(() => {
-                                    overlay.classList.remove('active');
-                                }, 2000);
-                            }
-                        }
-
-                        function nextQuestion() {
-                            currentQuestion++;
-                            if (currentQuestion >= QUESTIONS.length) {
-                                // Tampilkan tantangan di kontainer soal
-                                const soalContainer = document.getElementById('soal-container-3d');
-                                if (soalContainer) soalContainer.style.display = 'flex';
-
-                                const questionText = document.getElementById('question-text-3d');
-                                if (questionText) {
-                                    questionText.innerHTML = "Tantangan: Mengapa posisi planet dalam tata surya tidak boleh tertukar? Apa dampak buruknya jika Bumi bertukar tempat dengan Merkurius bagi kehidupan makhluk hidup? Yuk, Tuliskan Jawaban Kalian di Buku catatan! Sampai jumpa!";
-                                    questionText.style.fontSize = "clamp(11px, 1.15vw, 14px)";
-                                }
-
-                                const badge = document.getElementById('soal-badge-title');
-                                if (badge) badge.textContent = "TANTANGAN AKHIR";
-
-                                // Tampilkan popup skor di area inventory
-                                const scoreDisplay = document.getElementById('final-score-display');
-                                const scorePopup = document.getElementById('final-score-popup');
-                                const planetInventory = document.getElementById('planet-inventory');
-                                if (planetInventory) planetInventory.style.display = 'none';
-                                if (scoreDisplay) scoreDisplay.textContent = score.toFixed(1);
-                                if (scorePopup) scorePopup.style.display = 'flex';
-
-                                playVO('Asset/audio/vo-penutup.mp3');
-
-                                // Reset semua orbit ke warna asal agar orbit planet terakhir tidak beda sendiri
-                                if (window.sceneOrbits) {
-                                    Object.values(window.sceneOrbits).forEach(ring => {
-                                        ring.material.color.setHex(0x4af0c8); // Default cyan
-                                        ring.material.opacity = 0.2;
-                                    });
-                                }
-                            } else {
-                                setupGame();
-                            }
-                        }
-
-                        function endGame() {
-                            goToScreen('cover-screen');
-                            stopVO();
-                        }
-
-                        function resetGame() {
-                            // Remove all placed planets & reset orbit rings
-                            document.querySelectorAll('.placed-planet-orbit').forEach(p => p.remove());
-                            document.querySelectorAll('.planet-spinner').forEach(p => p.remove());
-                            document.querySelectorAll('.orbit-ring').forEach(r => {
-                                r.classList.remove('correct', 'wrong', 'highlight');
-                            });
-                            startGame();
-                        }
-
-                        function exitGame() {
-                            document.getElementById('final-score').textContent = score.toFixed(1) + ' dari 100';
-                            goToScreen('cover-screen');
-                        }
-
-                        function closeNarration() {
-                            document.getElementById('narration-popup').classList.remove('active');
-                        }
-
-                        function showNarration(text) {
-                            document.getElementById('narration-text').textContent = text;
-                            document.getElementById('narration-popup').classList.add('active');
-                        }
-
-                        // ========== INSTRUCTIONS CAROUSEL ==========
-                        let instructionsSlideIndex = 0;
-                        const instructionsSlideCount = 2;
-                        let instructionsCarouselTimer = null;
-
-                        function goInstructionsSlide(i) {
-                            instructionsSlideIndex = i;
-                            document.getElementById('instructions-carousel-track').style.transform = `translateX(-${i * 100}%)`;
-                            document.querySelectorAll('#instructions-carousel-dots .instructions-carousel-dot').forEach((d, idx) => {
-                                d.classList.toggle('active', idx === i);
-                            });
-                            resetInstructionsCarousel();
-                        }
-
-                        function nextInstructionsSlide() {
-                            instructionsSlideIndex = (instructionsSlideIndex + 1) % instructionsSlideCount;
-                            goInstructionsSlide(instructionsSlideIndex);
-                        }
-
-                        function resetInstructionsCarousel() {
-                            clearInterval(instructionsCarouselTimer);
-                            instructionsCarouselTimer = setInterval(nextInstructionsSlide, 25000);
-                        }
-
-                        resetInstructionsCarousel();
-
-                        // ========== INIT ==========
-                        goToScreen('cover-screen');
-                        createStars();
-            </script>
+                // 3. Efek rotasi berkas sinar matahari (2 layer berlawanan)
+                if (sunRays1 && sunRays1.material) {
+                    sunRays1.material.rotation -= 0.002;
+                }
+                if (sunRays2 && sunRays2.material) {
+                    sunRays2.material.rotation += 0.0015;
+                    const rayPulse = 1 + Math.cos(elapsedTime * 2.0) * 0.03;
+                    sunRays2.scale.set(36 * rayPulse, 36 * rayPulse, 1);
+                }
+                planets.forEach(p => {
+                    if (p.mesh.visible) {
+                        p.angle += p.speed;
+                        p.mesh.position.x = Math.cos(p.angle) * p.distance;
+                        p.mesh.position.z = Math.sin(p.angle) * (p.distance * 0.75);
+                        p.mesh.rotation.y += 0.02;
+                    }
+                });
+                starsMesh.rotation.y -= 0.0005;
+                controls.update();
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        function setupGame() {
+            answered = false;
+            const q = QUESTIONS[currentQuestion];
+
+            // Update UI
+            const questionText = document.getElementById('question-text-3d');
+            questionText.innerHTML = q.question;
+            questionText.style.fontSize = "";
+            const badge = document.getElementById('soal-badge-title');
+            if (badge) badge.textContent = "MISI DETEKTIF";
+
+            // Play VO soal
+            playVO(q.voSoal);
+
+            // Highlight the active orbit in 3D
+            if (window.sceneOrbits) {
+                Object.values(window.sceneOrbits).forEach(ring => {
+                    ring.material.color.setHex(0x4af0c8); // Default cyan
+                    ring.material.opacity = 0.2;
+                });
+
+                const activeRing = window.sceneOrbits[q.planet];
+                if (activeRing) {
+                    activeRing.material.color.setHex(0xffffff); // Highlight white
+                    activeRing.material.opacity = 0.8;
+                }
+            }
+        }
+
+        function checkAnswer(droppedPlanet) {
+            if (answered) return;
+
+            const q = QUESTIONS[currentQuestion];
+
+            if (droppedPlanet !== q.planet) {
+                playWrongSfx();
+                showFeedback(false, 'Ups! Planet yang kamu pilih belum tepat.', 'Coba lagi!');
+                return;
+            }
+
+            answered = true;
+            // CORRECT
+            score += 12.5;
+            playCorrectSfx();
+            playVO(q.voCorrect, () => {
+                const overlay = document.getElementById('feedback-overlay');
+                overlay.classList.remove('active');
+                nextQuestion();
+            });
+
+            // Mark planet in inventory as placed
+            const planetItem = document.querySelector(`.planet-item[data-planet="${droppedPlanet}"]`);
+            if (planetItem) planetItem.classList.add('placed');
+
+            // Spawn the 3D planet on its orbit
+            if (window.scenePlanets && window.scenePlanets[droppedPlanet]) {
+                window.scenePlanets[droppedPlanet].visible = true;
+            }
+
+            // Jadikan warna orbit seragam dengan yang lain (biru pudar)
+            if (window.sceneOrbits && window.sceneOrbits[droppedPlanet]) {
+                window.sceneOrbits[droppedPlanet].material.color.setHex(0x4af0c8);
+                window.sceneOrbits[droppedPlanet].material.opacity = 0.2;
+            }
+
+            showFeedback(true, q.correctFeedback, '+12,5 poin');
+        }
+
+        function getGifName(planet) {
+            const map = {
+                merkurius: 'merkurius.png',
+                venus: 'venus.png',
+                bumi: 'Bumi.png',
+                mars: 'mars.png',
+                jupiter: 'jupiter.png',
+                saturnus: 'saturnus.png',
+                uranus: 'uranus.png',
+                neptunus: 'neptunus.png'
+            };
+            return map[planet] || planet + '.png';
+        }
+
+        function showFeedback(isCorrect, text, scoreText) {
+            const overlay = document.getElementById('feedback-overlay');
+            const box = document.getElementById('feedback-box');
+            const icon = document.getElementById('feedback-icon');
+            const title = document.getElementById('feedback-title');
+            const detail = document.getElementById('feedback-detail');
+            const scoreEl = document.getElementById('feedback-score');
+
+            box.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
+            title.className = 'feedback-text ' + (isCorrect ? 'correct' : 'wrong');
+            scoreEl.className = 'feedback-score ' + (isCorrect ? 'correct' : 'wrong');
+
+            icon.textContent = isCorrect ? '\u2705' : '\u274C';
+            title.textContent = isCorrect ? 'BENAR!' : 'SALAH!';
+            detail.textContent = text;
+            scoreEl.textContent = scoreText;
+
+            overlay.classList.add('active');
+
+            if (!isCorrect) {
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                }, 2000);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion >= QUESTIONS.length) {
+                // Tampilkan tantangan di kontainer soal
+                const soalContainer = document.getElementById('soal-container-3d');
+                if (soalContainer) soalContainer.style.display = 'flex';
+
+                const questionText = document.getElementById('question-text-3d');
+                if (questionText) {
+                    questionText.innerHTML = "Tantangan: Mengapa posisi planet dalam tata surya tidak boleh tertukar? Apa dampak buruknya jika Bumi bertukar tempat dengan Merkurius bagi kehidupan makhluk hidup? Yuk, Tuliskan Jawaban Kalian di Buku catatan! Sampai jumpa!";
+                    questionText.style.fontSize = "clamp(11px, 1.15vw, 14px)";
+                }
+
+                const badge = document.getElementById('soal-badge-title');
+                if (badge) badge.textContent = "TANTANGAN AKHIR";
+
+                // Tampilkan popup skor di area inventory
+                const scoreDisplay = document.getElementById('final-score-display');
+                const scorePopup = document.getElementById('final-score-popup');
+                const planetInventory = document.getElementById('planet-inventory');
+                if (planetInventory) planetInventory.style.display = 'none';
+                if (scoreDisplay) scoreDisplay.textContent = score.toFixed(1);
+                if (scorePopup) scorePopup.style.display = 'flex';
+
+                playVO('Asset/audio/vo-penutup.mp3');
+
+                // Reset semua orbit ke warna asal agar orbit planet terakhir tidak beda sendiri
+                if (window.sceneOrbits) {
+                    Object.values(window.sceneOrbits).forEach(ring => {
+                        ring.material.color.setHex(0x4af0c8); // Default cyan
+                        ring.material.opacity = 0.2;
+                    });
+                }
+            } else {
+                setupGame();
+            }
+        }
+
+        function endGame() {
+            goToScreen('cover-screen');
+            stopVO();
+        }
+
+        function resetGame() {
+            // Remove all placed planets & reset orbit rings
+            document.querySelectorAll('.placed-planet-orbit').forEach(p => p.remove());
+            document.querySelectorAll('.planet-spinner').forEach(p => p.remove());
+            document.querySelectorAll('.orbit-ring').forEach(r => {
+                r.classList.remove('correct', 'wrong', 'highlight');
+            });
+            startGame();
+        }
+
+        function exitGame() {
+            document.getElementById('final-score').textContent = score.toFixed(1) + ' dari 100';
+            goToScreen('cover-screen');
+        }
+
+        function closeNarration() {
+            document.getElementById('narration-popup').classList.remove('active');
+        }
+
+        function showNarration(text) {
+            document.getElementById('narration-text').textContent = text;
+            document.getElementById('narration-popup').classList.add('active');
+        }
+
+        // ========== INSTRUCTIONS CAROUSEL ==========
+        let instructionsSlideIndex = 0;
+        const instructionsSlideCount = 2;
+        let instructionsCarouselTimer = null;
+
+        function goInstructionsSlide(i) {
+            instructionsSlideIndex = i;
+            document.getElementById('instructions-carousel-track').style.transform = `translateX(-${i * 100}%)`;
+            document.querySelectorAll('#instructions-carousel-dots .instructions-carousel-dot').forEach((d, idx) => {
+                d.classList.toggle('active', idx === i);
+            });
+            resetInstructionsCarousel();
+        }
+
+        function nextInstructionsSlide() {
+            instructionsSlideIndex = (instructionsSlideIndex + 1) % instructionsSlideCount;
+            goInstructionsSlide(instructionsSlideIndex);
+        }
+
+        function resetInstructionsCarousel() {
+            clearInterval(instructionsCarouselTimer);
+            instructionsCarouselTimer = setInterval(nextInstructionsSlide, 25000);
+        }
+
+        resetInstructionsCarousel();
+
+        // ========== INIT ==========
+        goToScreen('cover-screen');
+        createStars();
+    </script>
 </body>
 
 </html>
